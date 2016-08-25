@@ -12,8 +12,8 @@ TARGET = pro1
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        widget.cpp
+SOURCES += src\main.cpp\
+        src\widget.cpp
 
 HEADERS  += widget.h
 

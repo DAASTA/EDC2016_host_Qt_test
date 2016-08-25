@@ -47,40 +47,35 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="widget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_widget.cpp">
       <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\widget.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_widget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="camera_opencv.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="widget.h">
+    <CustomBuild Include="include\widget.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="widget.ui">
+    <CustomBuild Include="ui\widget.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\frame_rate_counter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_widget.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="frame_rate_counter.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="camera_opencv.h">
+    <ClInclude Include="include\camera_opencv.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

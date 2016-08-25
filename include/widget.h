@@ -10,7 +10,7 @@
 #include <QImage>
 
 #include "frame_rate_counter.hpp"
-#include "camera_opencv.h"
+#include "camera_opencv.hpp"
 
 namespace Ui {
 class Widget;
@@ -31,10 +31,8 @@ private:
     Ui::Widget  *ui;
 
     // capture
-    bool        capture_ready;
 	QImage	    capture_image;
     QTimer      *capture_timer;
-
     Camera      camera;
     cv::Mat          capture_frame;
 };
