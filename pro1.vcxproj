@@ -146,6 +146,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_widget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\widget.cpp" />
   </ItemGroup>

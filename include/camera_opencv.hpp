@@ -1,11 +1,15 @@
 // Created by sugar10w, 2016.8
-//      camera driven by opecv : videocapture & undistort
-//      read the undistort file
+//  Camera driven by opecv : videocapture & undistort
+//
+//  - Camera(id, file_name=""): 开启id号相机，并以file_name文件配置之
+//      - getFrame(): 获取当前图像
+//      - getFrameRate(): 获取当前帧率
 
 #pragma once
 
 #include <string>
 #include <iostream>
+#include <exception>
 
 #include <opencv2/opencv.hpp>
 
@@ -60,8 +64,8 @@ private:
             fs["width"] >> width;
             fs["height"] >> height;
         }
-        catch (...) {
-            std::cout << "[Warning] Error occurred when reading camera config file " << config_file_name << std::endl;
+        catch (const std::exception& e) {
+            std::cout << "[Warning] Error occurred when reading camera config file " << config_file_name << ", " << e.what() << std::endl;
             fs.release();
             return false;
         }

@@ -59,6 +59,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_widget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="src\game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="include\widget.h">
@@ -76,6 +79,15 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="include\camera_opencv.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\car.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\game.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\plane.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
