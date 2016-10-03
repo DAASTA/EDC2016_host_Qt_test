@@ -90,5 +90,14 @@
     <ClInclude Include="include\plane.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\contour.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\image_filter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\locator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

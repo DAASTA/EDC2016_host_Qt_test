@@ -154,8 +154,11 @@
     <ClInclude Include="GeneratedFiles\ui_widget.h" />
     <ClInclude Include="include\camera_opencv.hpp" />
     <ClInclude Include="include\car.hpp" />
+    <ClInclude Include="include\contour.hpp" />
     <ClInclude Include="include\frame_rate_counter.hpp" />
     <ClInclude Include="include\game.h" />
+    <ClInclude Include="include\image_filter.hpp" />
+    <ClInclude Include="include\locator.hpp" />
     <ClInclude Include="include\plane.hpp" />
     <CustomBuild Include="include\widget.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>

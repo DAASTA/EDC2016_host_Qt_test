@@ -11,6 +11,7 @@
 
 #include "frame_rate_counter.hpp"
 #include "camera_opencv.hpp"
+#include "locator.hpp"
 
 namespace Ui {
 class Widget;
@@ -34,7 +35,9 @@ private:
 	QImage	    capture_image;
     QTimer      *capture_timer;
     Camera      camera;
-    cv::Mat          capture_frame;
+    cv::Mat     capture_frame;
+    Locator     locator;
+    std::vector<cv::Point> locator_points;
 };
 
 #endif // WIDGET_H
