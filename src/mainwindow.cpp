@@ -1,7 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 #include "GameData.h"
-#include <QDebug>
+//#include <QDebug>
 extern GameData gameData;
 
 MainWindow::MainWindow(QWidget *parent) :
