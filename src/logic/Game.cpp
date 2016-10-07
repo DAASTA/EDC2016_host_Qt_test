@@ -146,7 +146,7 @@ void Game::SettleDamage() {
         break;
     default:
         cout << "[Error] Unknown Plane Status!" << _plane.GetPlaneStatus() << endl;
-        system("pause");
+        //system("pause");
     }
 
 }

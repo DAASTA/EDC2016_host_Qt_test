@@ -6,8 +6,7 @@
 #include <QTimer>
 
 #include "logic/GameData.h"
-
-
+#include "logic/Game.h"
 
 namespace Ui {
 class MainWindow;
@@ -30,7 +29,7 @@ private:
     QTimer *timer;
 
     GameData gameData;
-
+    Game game;
 };
 
 #endif // MAINWINDOW_H
