@@ -6,8 +6,8 @@
 Widget::Widget(QWidget *parent) :
     QWidget(parent)
     ,ui(new Ui::Widget)
-    ,camera(1, "./data/hd_usb_camera.xml")
-    //,camera(0)
+    //,camera(1, "./data/hd_usb_camera.xml")
+    ,camera(0)
     ,capture_timer(NULL)
 {
     ui->setupUi(this);

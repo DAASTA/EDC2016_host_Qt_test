@@ -102,3 +102,10 @@ x86/
 *.opendb
 *.user
 *.user.*
+
+# =========================
+
+*.props
+pro1.vcxproj
+
+log.txt
