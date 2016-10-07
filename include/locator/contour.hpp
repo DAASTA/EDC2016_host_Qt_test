@@ -10,7 +10,7 @@
 
 #include <opencv2/opencv.hpp>
 
-#include "image_filter.hpp"
+#include "locator/image_filter.hpp"
 
 class Contour {
 

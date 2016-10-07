@@ -5,8 +5,8 @@
 
 #include <opencv2\opencv.hpp>
 
-#include "contour.hpp"
-#include "image_filter.hpp"
+#include "locator/contour.hpp"
+#include "locator/image_filter.hpp"
 
 class Locator {
 public:
@@ -40,7 +40,7 @@ public:
                 cv::Vec3b& point = hsv_img.at<cv::Vec3b>(i, j);
                 uchar& h = point[0];
                 uchar& s = point[1];
-                //uchar& v = point[2];
+                uchar& v = point[2];
 
                 // 饱和度 > 100; 且色彩区域正确
                 if (s > 100) {

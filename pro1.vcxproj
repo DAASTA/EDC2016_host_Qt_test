@@ -152,7 +152,7 @@
     <ClCompile Include="GeneratedFiles\Release\moc_widget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\logic\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mainwindow.cpp" />
     <ClCompile Include="src\widget.cpp" />
@@ -160,13 +160,26 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
     <ClInclude Include="GeneratedFiles\ui_widget.h" />
-    <ClInclude Include="include\camera_opencv.hpp" />
-    <ClInclude Include="include\car.hpp" />
-    <ClInclude Include="include\contour.hpp" />
-    <ClInclude Include="include\frame_rate_counter.hpp" />
+    <ClInclude Include="include\camera\camera_opencv.hpp" />
+    <ClInclude Include="include\camera\frame_rate_counter.hpp" />
+    <ClInclude Include="include\communication\com.hpp" />
+    <ClInclude Include="include\communication\my_string.hpp" />
+    <ClInclude Include="include\communication\serial_port.hpp" />
+    <ClInclude Include="include\communication\socket.hpp" />
+    <ClInclude Include="include\communication\time_stamp.hpp" />
     <ClInclude Include="include\game.h" />
-    <ClInclude Include="include\image_filter.hpp" />
-    <ClInclude Include="include\locator.hpp" />
+    <ClInclude Include="include\locator\contour.hpp" />
+    <ClInclude Include="include\locator\image_filter.hpp" />
+    <ClInclude Include="include\locator\locator.hpp" />
+    <ClInclude Include="include\logic\Car.hpp" />
+    <ClInclude Include="include\logic\Common.h" />
+    <ClInclude Include="include\logic\Game.h" />
+    <ClInclude Include="include\logic\GameData.h" />
+    <ClInclude Include="include\logic\Map.hpp" />
+    <ClInclude Include="include\logic\Plane.hpp" />
+    <ClInclude Include="include\logic\Prop.hpp" />
+    <ClInclude Include="include\logic\Random.hpp" />
+    <ClInclude Include="include\logic\Target.hpp" />
     <CustomBuild Include="include\mainwindow.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing mainwindow.h...</Message>
@@ -177,7 +190,6 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG "-I.\include" "-I." "-I.\..\..\..\..\Qt\Qt5.6.1\5.6\msvc2015_64\include" "-I.\..\..\..\..\Qt\Qt5.6.1\5.6\msvc2015_64\include\QtWidgets" "-I.\..\..\..\..\Qt\Qt5.6.1\5.6\msvc2015_64\include\QtGui" "-I.\..\..\..\..\Qt\Qt5.6.1\5.6\msvc2015_64\include\QtANGLE" "-I.\..\..\..\..\Qt\Qt5.6.1\5.6\msvc2015_64\include\QtCore" "-I.\release" "-I.\..\..\..\..\Qt\Qt5.6.1\5.6\msvc2015_64\mkspecs\win32-msvc2015" "-I.\GeneratedFiles" "-I$(OPENCV_ROOT)\include" "-I$(OPENCV_ROOT)\include\opencv"</Command>
     </CustomBuild>
-    <ClInclude Include="include\plane.hpp" />
     <CustomBuild Include="include\widget.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing widget.h...</Message>

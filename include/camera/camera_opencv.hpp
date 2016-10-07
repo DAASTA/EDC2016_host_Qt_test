@@ -13,7 +13,7 @@
 
 #include <opencv2/opencv.hpp>
 
-#include "frame_rate_counter.hpp"
+#include "camera/frame_rate_counter.hpp"
 
 class Camera {
 public:

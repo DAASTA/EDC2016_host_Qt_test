@@ -1,9 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "GameData.h"
-//#include <QDebug>
-extern GameData gameData;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,27 +19,27 @@ MainWindow::~MainWindow()
 
 void MainWindow::update()
 {
-    ui->label_aircommond_1->setText(QString(gameData.carData[0]._air_command));
-    ui->label_color_1->setText(QString(gameData.carData[0]._color));
-    ui->label_x_1->setText(QString::number(gameData.carData[0]._pos.x));
-    ui->label_y_1->setText(QString::number(gameData.carData[0]._pos.y));
+    ui->label_aircommond_1->setText(QString(gameData.carData[0].air_command));
+    ui->label_color_1->setText(QString(gameData.carData[0].color));
+    ui->label_x_1->setText(QString::number(gameData.carData[0].pos.x));
+    ui->label_y_1->setText(QString::number(gameData.carData[0].pos.y));
     ui->label_TeamName_1->setText("NO.1");
-    ui->label_hp_2->setText(QString::number(gameData.carData[0]._health));
-    ui->label_aircommond_2->setText(QString(gameData.carData[1]._air_command));
-    ui->label_color_2->setText(QString(gameData.carData[0]._color));
-    ui->label_x_2->setText(QString::number(gameData.carData[1]._pos.x));
-    ui->label_y_2->setText(QString::number(gameData.carData[1]._pos.y));
-    ui->label_hp_2->setText(QString::number(gameData.carData[1]._health));
+    ui->label_hp_2->setText(QString::number(gameData.carData[0].health));
+    ui->label_aircommond_2->setText(QString(gameData.carData[1].air_command));
+    ui->label_color_2->setText(QString(gameData.carData[0].color));
+    ui->label_x_2->setText(QString::number(gameData.carData[1].pos.x));
+    ui->label_y_2->setText(QString::number(gameData.carData[1].pos.y));
+    ui->label_hp_2->setText(QString::number(gameData.carData[1].health));
     ui->label_TeamName_2->setText("NO.2");
-    ui->label_prop_type->setText(QString::number(int(gameData._prop)));
-    ui->label_prop_x->setText(QString::number(gameData._prop_pos.x));
-    ui->label_prop_y->setText(QString::number(gameData._prop_pos.y));
+    ui->label_prop_type->setText(QString::number(int(gameData.propType)));
+    ui->label_prop_x->setText(QString::number(gameData.propPoint.x));
+    ui->label_prop_y->setText(QString::number(gameData.propPoint.y));
     //ui->label_tower_x->setText(QString::number(gameData..x));
     //ui->label_tower_y->setText(QString::number(gameData..y));
     //ui->label_tower_color->setText(QString(QLatin1String(gameData.)));
     ui->label_air_status->setText(QString::number(int(gameData.planeStatus)));
-    ui->label_air_x->setText(QString::number(gameData.planePos.x));
-    ui->label_air_y->setText(QString::number(gameData.planePos.y));
+    ui->label_air_x->setText(QString::number(gameData.planePoint.x));
+    ui->label_air_y->setText(QString::number(gameData.planePoint.y));
 }
 
 void MainWindow::paintEvent(QPaintEvent *)

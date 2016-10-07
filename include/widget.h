@@ -9,9 +9,8 @@
 #include <QTimer>
 #include <QImage>
 
-#include "frame_rate_counter.hpp"
-#include "camera_opencv.hpp"
-#include "locator.hpp"
+#include "camera/camera_opencv.hpp"
+#include "locator/locator.hpp"
 
 namespace Ui {
 class Widget;

@@ -1,3 +1,7 @@
+/*
+ * 随机数生成
+ */
+
 #pragma once
 
 #include<cstdlib>
@@ -16,3 +20,4 @@ public:
     }
     int Rand() { return rand(); }
 };
+

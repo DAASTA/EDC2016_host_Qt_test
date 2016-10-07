@@ -5,6 +5,10 @@
 #include <QPainter>
 #include <QTimer>
 
+#include "logic/GameData.h"
+
+
+
 namespace Ui {
 class MainWindow;
 }
@@ -24,6 +28,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QTimer *timer;
+
+    GameData gameData;
+
 };
 
 #endif // MAINWINDOW_H
