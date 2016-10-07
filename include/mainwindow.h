@@ -21,12 +21,17 @@ public:
     ~MainWindow();
 
 private slots:
-    void update();
+    void ui_update();
     void paintEvent(QPaintEvent *);
 
 private:
     Ui::MainWindow *ui;
-    QTimer *timer;
+
+    QTimer *timer_ui;            // UI刷新  30Hz
+    QTimer *timer_capture;       // 摄像头，定位  30hz
+
+    QTimer *timer_logic;         //  逻辑 10Hz
+    QTimer *timer_communication; //  通讯 10hz
 
     GameData gameData;
     Game game;

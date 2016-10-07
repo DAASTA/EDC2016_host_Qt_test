@@ -187,7 +187,7 @@
       <height>482</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout_2">
+    <layout class="QGridLayout" name="gridLayout_1">
      <property name="sizeConstraint">
       <enum>QLayout::SetMinAndMaxSize</enum>
      </property>
@@ -195,24 +195,24 @@
       <number>0</number>
      </property>
      <item row="12" column="0">
-      <widget class="QLineEdit" name="lineEdit_hpchange_1"/>
+      <widget class="QLineEdit" name="lineEdit_hpchange_0"/>
      </item>
      <item row="13" column="0">
-      <widget class="QPushButton" name="pushButton_change_1">
+      <widget class="QPushButton" name="pushButton_change_0">
        <property name="text">
         <string>修改血量</string>
        </property>
       </widget>
      </item>
      <item row="13" column="2">
-      <widget class="QPushButton" name="pushButton_change_2">
+      <widget class="QPushButton" name="pushButton_change_1">
        <property name="text">
         <string>修改血量</string>
        </property>
       </widget>
      </item>
      <item row="12" column="2">
-      <widget class="QLineEdit" name="lineEdit_hpchange_2"/>
+      <widget class="QLineEdit" name="lineEdit_hpchange_1"/>
      </item>
      <item row="0" column="0">
       <widget class="QLabel" name="label_10">
@@ -222,7 +222,7 @@
       </widget>
      </item>
      <item row="11" column="2">
-      <widget class="QLabel" name="label_aircommond_2">
+      <widget class="QLabel" name="label_aircommond_1">
        <property name="text">
         <string>TextLabel</string>
        </property>
@@ -236,35 +236,35 @@
       </widget>
      </item>
      <item row="11" column="0">
-      <widget class="QLabel" name="label_aircommond_1">
+      <widget class="QLabel" name="label_aircommond_0">
        <property name="text">
         <string>TextLabel</string>
        </property>
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="label_TeamName_1">
+      <widget class="QLabel" name="label_TeamName_0">
        <property name="text">
         <string>TextLabel</string>
        </property>
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QLabel" name="label_TeamName_2">
+      <widget class="QLabel" name="label_TeamName_1">
        <property name="text">
         <string>TextLabel</string>
        </property>
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QLabel" name="label_hp_1">
+      <widget class="QLabel" name="label_hp_0">
        <property name="text">
         <string>TextLabel</string>
        </property>
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="label_1">
        <property name="text">
         <string>hp</string>
        </property>
@@ -285,21 +285,21 @@
       </widget>
      </item>
      <item row="3" column="2">
-      <widget class="QLabel" name="label_hp_2">
+      <widget class="QLabel" name="label_hp_1">
        <property name="text">
         <string>TextLabel</string>
        </property>
       </widget>
      </item>
      <item row="5" column="0">
-      <widget class="QLabel" name="label_color_1">
+      <widget class="QLabel" name="label_color_0">
        <property name="text">
         <string>TextLabel</string>
        </property>
       </widget>
      </item>
      <item row="5" column="2">
-      <widget class="QLabel" name="label_color_2">
+      <widget class="QLabel" name="label_color_1">
        <property name="text">
         <string>TextLabel</string>
        </property>
@@ -334,7 +334,7 @@
       </widget>
      </item>
      <item row="7" column="0">
-      <widget class="QLabel" name="label_x_1">
+      <widget class="QLabel" name="label_x_0">
        <property name="text">
         <string>TextLabel</string>
        </property>
@@ -355,21 +355,21 @@
       </widget>
      </item>
      <item row="9" column="0">
-      <widget class="QLabel" name="label_y_1">
+      <widget class="QLabel" name="label_y_0">
        <property name="text">
         <string>TextLabel</string>
        </property>
       </widget>
      </item>
      <item row="7" column="2">
-      <widget class="QLabel" name="label_x_2">
+      <widget class="QLabel" name="label_x_1">
        <property name="text">
         <string>TextLabel</string>
        </property>
       </widget>
      </item>
      <item row="9" column="2">
-      <widget class="QLabel" name="label_y_2">
+      <widget class="QLabel" name="label_y_1">
        <property name="text">
         <string>TextLabel</string>
        </property>
