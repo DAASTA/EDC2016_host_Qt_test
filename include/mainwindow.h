@@ -22,16 +22,22 @@ public:
     ~MainWindow();
 
 private slots:
+
+	void change_0();
 	void change_1();
-	void change_2();
 	void game_reset();
 	void ui_update();
 	void game_status_change();
 
 private:
     Ui::MainWindow *ui;
-    QTimer *timer_ui;
+
 	bool game_status;
+    
+    QTimer *timer_ui;            // UI刷新  30Hz
+    QTimer *timer_capture;       // 摄像头，定位  30h
+    QTimer *timer_logic;         //  逻辑 10Hz
+    QTimer *timer_communication; //  通讯 10hz
 
     LogReader logreader;
     GameData gameData;
