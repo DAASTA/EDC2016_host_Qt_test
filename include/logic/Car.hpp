@@ -101,7 +101,11 @@ public:
         _count_air_command = 0;
     }
 
-    inline bool IsAlive() { return (_health >= HP_DEATH); } //是否存活
+    ////////////////////////////////数据接口
+
+    inline void SetHealth(double hp) { _health = hp; }
+
+    inline bool IsAlive() const { return (_health >= HP_DEATH); } //是否存活
     inline bool CommandAir() const { return _air_command; }//是否有制空权
     inline Point GetPoint() const { return this->_pos; }//返回小车位置
     inline double GetHealth() const { return _health; }//返回血量(补充）

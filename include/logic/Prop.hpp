@@ -41,13 +41,16 @@ public:
 
     void Consume() {
         _waiting_count = 0;
+        _waiting_count_waste = 0;
         _prop = PropET;
     }
 
-	void Generate(std::vector<Point> avoid_point_list, int _map_size, double distance = 50) {
+	void Generate(std::vector<Point> avoid_point_list, int _map_size) {
 		// 产生一个道具，而且不能非常靠近传进来的几个点(小车,目标点什么的)
 
-        // 隔一段时间会出现道具
+        _waiting_count_waste = 0;
+        _waiting_count = 0;
+
         _prop = (PropType)(_random.Rand() % (PROP_SIZE - 1) + 1); // 避免0号NULL道具
 
         if (_prop != PropBW) {
@@ -92,7 +95,7 @@ public:
 
 	bool CheckPoint(Point p) { //检查此点是否距离 _point 足够近
 
-        return PropET != _prop && p.getDistance(_point) < PROP_DISTANCE;
+        return PropET != _prop && p.getDistance(_point) < RADIUS_PROP;
 	}
 
 	inline Point getPoint() const { return _point; }

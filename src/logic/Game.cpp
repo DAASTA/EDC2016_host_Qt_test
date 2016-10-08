@@ -39,6 +39,14 @@ void Game::Refresh(const Point & pcar1, const Point & pcar2, const Point & pplan
     out_file << getGameData().getString() << endl;
 }
 
+void Game::Refresh(const GameData& gamedata)
+{
+    _car[Red].SetHealth(gamedata.carData[Red].health);
+    _car[Blue].SetHealth(gamedata.carData[Blue].health);
+
+    Refresh(gamedata.carData[Red].pos, gamedata.carData[Blue].pos, gamedata.planePoint);
+}
+
 GameData Game::getGameData()
 {
 	GameData g;
@@ -110,8 +118,8 @@ void Game::SettleDamage() {
             , b_color = _map.GetPointColor(b_pos);
         double r_distance = r_pos.getDistance(tid_pos)
             , b_distance = b_pos.getDistance(tid_pos);
-        bool critical = (r_color == tower_color && r_distance <= CRITICAL_DISTANCE)
-            || (b_color == tower_color && b_distance <= CRITICAL_DISTANCE);
+        bool critical = (r_color == tower_color && r_distance <= RADIUS_CRITICAL)
+            || (b_color == tower_color && b_distance <= RADIUS_CRITICAL);
 
         if (r_color == tower_color && b_color == tower_color) { //都位于正确颜色
             if (r_distance == b_distance) { //都位于正确颜色，且两者距离相等
@@ -146,7 +154,7 @@ void Game::SettleDamage() {
         break;
     default:
         cout << "[Error] Unknown Plane Status!" << _plane.GetPlaneStatus() << endl;
-        //system("pause");
+        system("pause");
     }
 
 }
