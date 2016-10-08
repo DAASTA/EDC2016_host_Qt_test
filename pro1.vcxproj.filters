@@ -71,6 +71,9 @@
     <ClCompile Include="src\logic\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_pic.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="include\widget.h">
@@ -85,6 +88,7 @@
     <CustomBuild Include="include\mainwindow.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="pic.qrc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_widget.h">

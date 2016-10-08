@@ -21,13 +21,16 @@ public:
     ~MainWindow();
 
 private slots:
-    void update();
-    void paintEvent(QPaintEvent *);
+	void change_1();
+	void change_2();
+	void game_reset();
+	void ui_update();
+	void game_status_change();
 
 private:
     Ui::MainWindow *ui;
-    QTimer *timer;
-
+    QTimer *timer_ui;
+	bool game_status;
     GameData gameData;
     Game game;
 };

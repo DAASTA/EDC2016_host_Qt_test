@@ -45,7 +45,7 @@ public:
     inline bool IfCarHealedByPlane(CarName car_name) const { return _car[car_name].GetHealPlane(); }
     inline bool IfCommandAircar(CarName car_name) const { return _car[Red].CommandAir(); }
 
-
+	
 	
 private:
 	std::ofstream out_file;
