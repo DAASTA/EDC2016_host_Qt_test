@@ -4,6 +4,12 @@
 
 #include "logic/Common.h"
 
+const static char* const format_car =  "     %4.1lf %3d %3d   %1d   %3d %3d   %1d %1d    %1d %3d \r\n";
+const static char* const format_car_in = "%lf%d%d%d%d%d%d%d%d%d";
+
+const static char* const format_game = "%3d  %3d %3d %4.1lf   %3d %3d %1d    %3d %3d %1d  \r\n";
+const static char* const format_game_in = "%d%d%d%lf%d%d%d%d%d%d";
+
 struct CarData
 {
     //小车信息
@@ -19,7 +25,9 @@ struct CarData
 
     std::string getString() {
         char buffer[512];
-        sprintf(buffer, " [ HP %.1lf pos (%d,%d) color %d A L%d S%d PA%d PH%d AC%d(%d) ] ",
+        
+
+        sprintf(buffer, format_car,
             health, pos.x, pos.y, color, 
             long_attack_map, short_attack_map, 
             attack_plane, heal_plane, 
@@ -28,6 +36,14 @@ struct CarData
         // return all data
     }
 
+    void loadString(char* buffer) {
+        
+        sscanf(buffer, format_car_in,
+            &health, &pos.x, &pos.y, &color,
+            &long_attack_map, &short_attack_map,
+            &attack_plane, &heal_plane,
+            &air_command, &count_air_command);
+    }
 };
 
 
@@ -52,15 +68,23 @@ struct GameData
     PropType propType; // 道具类型
 
     std::string getString() {
-
         char buffer[512];
-        sprintf(buffer, " round %d : target (%d,%d) %.1lf ; plane (%d,%d) %d ; prop (%d,%d) %d ; ",
+        
+        sprintf(buffer, format_game,
             round,
             targetPoint.x, targetPoint.y, targetHealth,
             planePoint.x, planePoint.y, planeStatus,
             propPoint.x, propPoint.y, propType);
         return (buffer + carData[Red].getString() + carData[Blue].getString());
-        // ( call carData.getString()) and return all data 
+    }
+
+    void loadString(char* buffer) {
+
+        sscanf(buffer, format_game_in,
+            &round,
+            &(targetPoint.x), &(targetPoint.y), &targetHealth,
+            &(planePoint.x), &(planePoint.y), &planeStatus,
+            &(propPoint.x), &(propPoint.y), &propType);
     }
 
 };

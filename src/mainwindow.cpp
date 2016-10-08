@@ -11,18 +11,23 @@ MainWindow::MainWindow(QWidget *parent) :
     game("./data/test.txt")
 {
     ui->setupUi(this);
+
     timer_ui = new QTimer(this);
     connect(timer_ui, SIGNAL(timeout()), this, SLOT(ui_update()));
-	connect(ui->pushButton_change_1, SIGNAL(clicked()), this, SLOT(change_1()));
-	connect(ui->pushButton_change_2, SIGNAL(clicked()), this, SLOT(change_2()));
-	connect(ui->pushButton_reset, SIGNAL(clicked()), this, SLOT(game_reset()));
-	connect(ui->pushButton_start, SIGNAL(clicked()), this, SLOT(game_status_change()));
-    timer_ui->start(33);
-	ui_update();
-	ui->pic_car_1->setPixmap(QPixmap(":/image/car_1.png").scaled(SIZEPIC, SIZEPIC));
-	ui->pic_car_2->setPixmap(QPixmap(":/image/car_2.png").scaled(SIZEPIC, SIZEPIC));
-	ui->pic_target->setPixmap(QPixmap(":/image/star.png").scaled(SIZEPIC, SIZEPIC));
-	ui->pic_air->setPixmap(QPixmap(":/image/ufo.png").scaled(SIZEPIC, SIZEPIC));
+	timer_ui->start(33);
+
+    connect(ui->pushButton_change_1, SIGNAL(clicked()), this, SLOT(change_1()));
+    connect(ui->pushButton_change_2, SIGNAL(clicked()), this, SLOT(change_2()));
+    connect(ui->pushButton_reset, SIGNAL(clicked()), this, SLOT(game_reset()));
+    connect(ui->pushButton_start, SIGNAL(clicked()), this, SLOT(game_status_change()));
+
+	ui->pic_car_1->setPixmap(QPixmap(":/image/car_1").scaled(SIZEPIC, SIZEPIC));
+	ui->pic_car_2->setPixmap(QPixmap(":/image/car_2").scaled(SIZEPIC, SIZEPIC));
+	ui->pic_target->setPixmap(QPixmap(":/image/star").scaled(SIZEPIC, SIZEPIC));
+	ui->pic_air->setPixmap(QPixmap(":/image/ufo").scaled(SIZEPIC, SIZEPIC));
+
+    logreader.LoadMap("./data/test.txt");
+    logreader.LoadLog("./data/log_sample.txt");
 }
 
 MainWindow::~MainWindow()
@@ -42,10 +47,17 @@ void MainWindow::change_2()
 	ui->lineEdit_hpchange_2->clear();
 }
 
+void MainWindow::game_reset()
+{
+}
+
 void MainWindow::ui_update()
 {
-    game.Refresh(Point(127,127), Point(127, 127), Point(127, 127));
-    gameData = game.getGameData();
+    //game.Refresh(Point(100,100), Point(120, 120), Point(127, 127));
+    //gameData = game.getGameData();
+    static int round = 0;
+    gameData = logreader.getGameData(++round);
+
 	ui->label_aircommond_1->setText(QString::number((int)gameData.carData[0].air_command));
     ui->label_color_1->setText(QString::number((int)(gameData.carData[0].color)));
     ui->label_x_1->setText(QString::number(gameData.carData[0].pos.x));
@@ -74,8 +86,12 @@ void MainWindow::ui_update()
 	ui->pic_car_2->move(x0 + gameData.carData[1].pos.x, y0 - gameData.carData[1].pos.y);
 	ui->pic_air->move(x0 + gameData.planePoint.x, y0 - gameData.planePoint.y);
 	ui->pic_target->move(x0 + gameData.targetPoint.x, y0 - gameData.targetPoint.y);
-	ui->pic_prop->setPixmap(QPixmap(QString(":/image/prop_%1.png").arg(int(gameData.propType))).scaled(SIZEPIC, SIZEPIC));
+	ui->pic_prop->setPixmap(QPixmap(QString(":/image/prop_%1").arg(int(gameData.propType))).scaled(SIZEPIC, SIZEPIC));
 	ui->pic_prop->move(x0 + gameData.propPoint.x, y0 - gameData.propPoint.y);
+}
+
+void MainWindow::game_status_change()
+{
 }
 
 

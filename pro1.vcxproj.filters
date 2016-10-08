@@ -45,6 +45,11 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\Debug\moc_widget.cpp">
@@ -71,8 +76,8 @@
     <ClCompile Include="src\logic\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_pic.cpp">
-      <Filter>Generated Files\Debug</Filter>
+    <ClCompile Include="GeneratedFiles\qrc_image.cpp">
+      <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -88,7 +93,9 @@
     <CustomBuild Include="include\mainwindow.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="pic.qrc" />
+    <CustomBuild Include="image.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_widget.h">
@@ -157,5 +164,31 @@
     <ClInclude Include="include\camera\frame_rate_counter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="image\car_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="image\car_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="image\star.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="image\ufo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="image\prop_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="image\prop_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="image\prop_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="image\prop_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

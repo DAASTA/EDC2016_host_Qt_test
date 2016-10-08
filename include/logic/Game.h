@@ -24,6 +24,7 @@ public:
     Game(std::string filename = "./data/test.txt");
 
     void Refresh(const Point& p1, const Point& p2, const Point& pp);//Ë¢ÐÂPlane, carsÎ»ÖÃ
+    void Refresh(const GameData& gamedata);
 
 	GameData getGameData(); 
 
@@ -43,9 +44,9 @@ public:
     inline bool IfCarShortAttackedByMap(CarName car_name) const { return _car[car_name].GetShortAttackMap(); }
     inline bool IfCarAttackedByMap(CarName car_name) const { return _car[car_name].GetAttackMap(); }
     inline bool IfCarHealedByPlane(CarName car_name) const { return _car[car_name].GetHealPlane(); }
-    inline bool IfCommandAircar(CarName car_name) const { return _car[Red].CommandAir(); }
+    inline bool IfCommandAircar(CarName car_name) const { return _car[car_name].CommandAir(); }
 
-	
+
 	
 private:
 	std::ofstream out_file;

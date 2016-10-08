@@ -7,6 +7,7 @@
 
 #include "logic/GameData.h"
 #include "logic/Game.h"
+#include "display/log_reader.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -31,6 +32,8 @@ private:
     Ui::MainWindow *ui;
     QTimer *timer_ui;
 	bool game_status;
+
+    LogReader logreader;
     GameData gameData;
     Game game;
 };
