@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>开始</string>
+     <string>start</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_reset">
@@ -37,7 +37,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>复位</string>
+     <string>reset</string>
     </property>
    </widget>
    <widget class="QWidget" name="layoutWidget1">
