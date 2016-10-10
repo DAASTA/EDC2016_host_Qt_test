@@ -421,7 +421,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="pic_car_1">
+   <widget class="QLabel" name="pic_car_0">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -434,7 +434,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="pic_car_2">
+   <widget class="QLabel" name="pic_car_1">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -486,6 +486,19 @@
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="Status">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>610</y>
+      <width>631</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -493,7 +506,7 @@
      <x>0</x>
      <y>0</y>
      <width>1035</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

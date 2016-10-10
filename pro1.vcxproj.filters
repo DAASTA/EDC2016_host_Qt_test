@@ -161,6 +161,9 @@
     <ClInclude Include="include\camera\frame_rate_counter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\game.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="image\car_2.png">

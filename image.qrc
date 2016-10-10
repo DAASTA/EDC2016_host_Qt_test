@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/image">
-        <file alias="car_2">image/car_2.png</file>
+        <file alias="car_0">image/car_0.png</file>
         <file alias="car_1">image/car_1.png</file>
         <file alias="star">image/star.png</file>
         <file alias="ufo">image/ufo.png</file>
