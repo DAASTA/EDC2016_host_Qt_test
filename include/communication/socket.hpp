@@ -21,18 +21,19 @@
 
 #pragma comment(lib, "ws2_32.lib")
 
+static int SocketBaseCount = 0;
 class SocketBase {
 public:
     SocketBase() {
-        if (count == 0) StartUp();
-        ++count;
+        if (SocketBaseCount == 0) StartUp();
+        ++SocketBaseCount;
     }
     ~SocketBase() {
-        --count;
-        if (count == 0) Finish();
+        --SocketBaseCount;
+        if (SocketBaseCount == 0) Finish();
     }
 
-    static int getSocketCount() { return count; }
+    static int getSocketCount() { return SocketBaseCount; }
 
 private:
     static void StartUp() {
@@ -49,9 +50,9 @@ private:
         WSACleanup();
         printf("[Info] WSA Clean up.\n");
     }
-    static int count;
+    
 };
-int SocketBase::count = 0;
+
 
 class SocketServer : SocketBase {
 public:

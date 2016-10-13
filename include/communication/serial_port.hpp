@@ -86,7 +86,7 @@ public:
         int result;
         
         // open com device
-        result = OpenCOMDevice(com_, baud_rate_);
+        result = COM::OpenCOMDevice(com_, baud_rate_);
         if (result != 0) {
             printf("[Error] Failed to open COM%d\n", com_);
             return;
@@ -100,10 +100,10 @@ public:
     }
 
     void send(const char* msg, int length) {
-        SendUARTMessageLength(com_, msg, length);
+        COM::SendUARTMessageLength(com_, msg, length);
     }
     void send(MyString& s) {
-        SendUARTMessageLength(com_, s.c_str(), s.length());
+        COM::SendUARTMessageLength(com_, s.c_str(), s.length());
     }
 
     std::vector<MyString> receive() {
@@ -112,7 +112,7 @@ public:
             printf("[Error] This serial port (com%d) is invalid.\n", com_);
             return list;
         }
-        total_length += CollectUARTData(com_, buffer);
+        total_length += COM::CollectUARTData(com_, buffer);
         return protol_.decodeLines(buffer, total_length);
     }
 

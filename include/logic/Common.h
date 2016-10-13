@@ -45,7 +45,7 @@ const int PROP_SIZE = 4;
 enum PropType { PropET = 0, PropHP = 1, PropBW = 2, PropAC = 3 }; //(EmpTy)空，（Black-White）黑白颠倒，(+HP)加生命，(Air Command)制空权
 enum GameStatus { Running = 0, RedWin = 1, BlueWin = 2, Tie = 3 };
 enum CarName { Red = 0, Blue = 1 };
-enum PlaneStatus { PlaneNone = 0, PlaneAttack = 1, PlaneHeal = 2 };
+enum PlaneStatus { PlaneHeal = 0, PlaneAttack = 1, PlaneNone = 10 };
 
 //点的颜色：0代表黑，255代表白
 struct Point {

@@ -1,32 +1,46 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <qpixmap.h>
-#include <qtextcodec.h>
+//#include <qtextcodec.h>
 
 const int SIZEPIC = 50;
-
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
     ,ui(new Ui::MainWindow)
     ,game("./data/test.txt")
-    //,camera(1, "./data/hd_usb_camera.xml")
-    , camera(0)
+    ,camera(0, "./data/hd_usb_camera.xml")
+    //, camera(0)
     , capture_timer(NULL)
 {
     ui->setupUi(this);
-    QTextCodec::setCodecForLocale(QTextCodec::codecForName("GB2312"));
-    timer_ui = new QTimer(this);
-    timer_logic = new QTimer(this);
-    timer_ui->start(33);
-    connect(timer_ui, SIGNAL(timeout()), this, SLOT(ui_update()));
-    connect(timer_logic, SIGNAL(timeout()), this, SLOT(next_round()));
 
+	status = GameWaiting;
+
+	port = new SerialPort(15, 115200/*, protol*/);
+
+    //QTextCodec::setCodecForLocale(QTextCodec::codecForName("GB2312"));
+
+    // timer_ui
+    timer_ui = new QTimer(this);
+    connect(timer_ui, SIGNAL(timeout()), this, SLOT(ui_update()));
+    timer_ui->start(33);
+
+    // timer_logic
+    timer_logic = new QTimer(this);
+    connect(timer_logic, SIGNAL(timeout()), this, SLOT(next_round()));
+    //timer_logic->start(100); 
+
+    // timer_communication
+    timer_communication = new QTimer(this);
+	connect(timer_communication, SIGNAL(timeout()), this, SLOT(communicate()));
+	timer_communication->start(100);
+
+    // ui
     connect(ui->pushButton_change_0, SIGNAL(clicked()), this, SLOT(change_0()));
     connect(ui->pushButton_change_1, SIGNAL(clicked()), this, SLOT(change_1()));
     connect(ui->pushButton_reset, SIGNAL(clicked()), this, SLOT(game_reset()));
     connect(ui->pushButton_start, SIGNAL(clicked()), this, SLOT(game_status_change()));
-
     ui->pic_car_0->setPixmap(QPixmap(":/image/car_0").scaled(SIZEPIC, SIZEPIC));
     ui->pic_car_1->setPixmap(QPixmap(":/image/car_1").scaled(SIZEPIC, SIZEPIC));
     ui->pic_target->setPixmap(QPixmap(":/image/star").scaled(SIZEPIC, SIZEPIC));
@@ -36,14 +50,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pic_target->setVisible(false);
     ui->pic_air->setVisible(false);
     ui->pic_prop->setVisible(false);
+    
+    // init logic
     init_gameData();
 
+    // set up the camera
     if (!camera.isValid()) {
         ui->pic->setText("Invalid camera.");
         ui->Status->setText("Failed to load the camera.");
     }
     else {
-        // set up capture_timer
         capture_timer = new QTimer(this);
         connect(capture_timer, SIGNAL(timeout()), this, SLOT(capture_update()));
         capture_timer->start(20);
@@ -57,7 +73,18 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-    if (NULL != timer_ui) delete timer_ui;
+    
+    if (NULL != timer_ui) delete timer_ui; 
+    timer_ui = NULL;
+    
+    if (NULL != timer_capture) delete timer_capture;
+    timer_capture = NULL;
+
+    if (NULL != timer_logic) delete timer_logic;
+    timer_logic = NULL;
+
+    if (NULL != timer_communication) delete timer_communication;
+    timer_communication = NULL;
 }
 
 void MainWindow::change_0()
@@ -65,9 +92,7 @@ void MainWindow::change_0()
     gameData.carData[0].health += ui->lineEdit_hpchange_0->text().toInt();
     ui->lineEdit_hpchange_0->clear();
 }
-
-
-void MainWindow::change_1()
+void MainWindow::change_1() 
 {
     gameData.carData[1].health += ui->lineEdit_hpchange_1->text().toInt();
     ui->lineEdit_hpchange_1->clear();
@@ -75,10 +100,21 @@ void MainWindow::change_1()
 
 void MainWindow::game_reset()
 {
-    init_gameData();
-    game = Game("./data/test.txt");
-    timer_logic->stop();
+    // ui 
+	ui->pic_target->setVisible(false);
+	ui->pic_air->setVisible(false);
+	ui->pic_prop->setVisible(false);
     ui->pushButton_start->setText(tr("start"));
+
+    // logic
+    game = Game("./data/test.txt");
+    init_gameData();
+
+    // game control
+    status = GameWaiting;
+
+    // timer logic
+    timer_logic->stop();
 }
 
 void MainWindow::ui_update()
@@ -89,14 +125,16 @@ void MainWindow::ui_update()
     ui->label_x_0->setText(QString::number(gameData.carData[0].pos.x));
     ui->label_y_0->setText(QString::number(gameData.carData[0].pos.y));
     ui->label_hp_0->setText(QString::number(gameData.carData[0].health));
-    ui->label_TeamName_0->setText("NO.1");
+    ui->label_TeamName_0->setText("Team Red");
+
     ui->label_hp_1->setText(QString::number(gameData.carData[0].health));
     ui->label_aircommond_1->setText(QString::number((int)gameData.carData[1].air_command));
     ui->label_color_1->setText(QString::number((int)(gameData.carData[1].color)));
     ui->label_x_1->setText(QString::number(gameData.carData[1].pos.x));
     ui->label_y_1->setText(QString::number(gameData.carData[1].pos.y));
     ui->label_hp_1->setText(QString::number(gameData.carData[1].health));
-    ui->label_TeamName_1->setText("NO.2");
+    ui->label_TeamName_1->setText("Team Blue");
+    
     ui->label_prop_type->setText(QString::number(int(gameData.propType)));
     ui->label_prop_x->setText(QString::number(gameData.propPoint.x));
     ui->label_prop_y->setText(QString::number(gameData.propPoint.y));
@@ -106,6 +144,7 @@ void MainWindow::ui_update()
     ui->label_air_status->setText(QString::number(int(gameData.planeStatus)));
     ui->label_air_x->setText(QString::number(gameData.planePoint.x));
     ui->label_air_y->setText(QString::number(gameData.planePoint.y));
+    
     int x0 = 510 - 127;
     int y0 = 329 - 127;
     ui->pic_car_0->move(x0 + gameData.carData[0].pos.x, y0 + gameData.carData[0].pos.y);
@@ -126,19 +165,31 @@ void MainWindow::ui_update()
 
 void MainWindow::game_status_change()
 {
-    if (ui->pushButton_start->text() == "start")
+    if (ui->pushButton_start->text() == "start") // TODO  change it to constant
     {
+        // game control 
+		status = GameStart;
+
+        // ui
         ui->pic_car_0->setVisible(true);
         ui->pic_car_1->setVisible(true);
         ui->pic_target->setVisible(true);
         ui->pic_air->setVisible(true);
         ui->pic_prop->setVisible(true);
         ui->pushButton_start->setText(tr("pause"));
+
+        // timer_logic
         timer_logic->start(100);
     }
     else if (ui->pushButton_start->text() == "pause")
     {
+        // game control
+		status = GamePause;
+
+        // ui
         ui->pushButton_start->setText(tr("start"));
+
+        // timer_logic
         timer_logic->stop();
     }
 }
@@ -149,12 +200,61 @@ void MainWindow::next_round()
     gameData = game.getGameData();
 }
 
+void MainWindow::communicate()
+{
+    char mes[4] = { 0 };
+    mes[0] = (gameData.carData[0].long_attack_map ? 1 : 0) << 7
+        | (gameData.carData[1].long_attack_map ? 1 : 0) << 6
+        | (gameData.carData[0].short_attack_map ? 1 : 0) << 5
+        | (gameData.carData[1].short_attack_map ? 1 : 0) << 4
+        | (gameData.carData[0].attack_plane ? 1 : 0) << 3
+        | (gameData.carData[1].attack_plane ? 1 : 0) << 2
+        | status;
+
+    mes[1] = (gameData.carData[0].out_of_range ? 1 : 0) << 7
+        | (gameData.carData[1].out_of_range ? 1 : 0) << 6
+        | (gameData.carData[0].air_command ? 1 : 0) << 5
+        | (gameData.carData[1].air_command ? 1 : 0) << 4
+        | (gameData.carData[0].heal_plane ? 1 : 0) << 3
+        | (gameData.carData[1].heal_plane ? 1 : 0) << 2
+        | (gameData.targetHealth > 0 ? 1 : 0) << 1
+        | gameData.planeStatus;
+
+    mes[2] = gameData.round & 0xFF;
+
+    mes[3] = gameData.propType << 6
+        | ((gameData.round >> 8) & 0x3F);
+
+    char res[18] = {
+        mes[0],
+        mes[1],
+        gameData.carData[0].pos.x,
+        gameData.carData[0].pos.y,
+        gameData.carData[1].pos.x,
+        gameData.carData[1].pos.y,
+        gameData.targetPoint.x,
+        gameData.targetPoint.y,
+        gameData.planePoint.x,
+        gameData.planePoint.y,
+        (unsigned char)(gameData.carData[0].health),
+        (unsigned char)(gameData.carData[1].health),
+        gameData.propPoint.x,
+        gameData.propPoint.y,
+        mes[2],
+        mes[3],
+        0x0D,
+        0x0A }; 
+
+	port->send(res, 18);
+
+}
+
 void MainWindow::init_gameData()
 {
     gameData.round = 0;
     gameData.carData[0] = { 200,Point(0,0) };
     gameData.carData[1] = { 200,Point(0,0) };
-    gameData.planePoint = Point(255, 255);
+	gameData.planePoint = Point(255, 255);
 }
 
 void MainWindow::capture_update()
@@ -182,7 +282,6 @@ void MainWindow::capture_update()
 
             gameData.carData[Blue].pos.x = locator_points[1].x - 192.5;
             gameData.carData[Blue].pos.y = locator_points[1].y - 112.5;
-
 
             // update image
             capture_image = QImage(

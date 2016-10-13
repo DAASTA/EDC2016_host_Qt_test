@@ -12,6 +12,8 @@ const static char* const format_game_in = "%d%d%d%lf%d%d%d%d%d%d";
 
 struct CarData
 {
+    
+
     //小车信息
     double health;//血量
     Point pos;//位置
@@ -22,6 +24,8 @@ struct CarData
     bool heal_plane;//是否被飞机加血
     bool air_command;//是否有制空权
     int count_air_command;//记录制空权回合数
+
+    bool out_of_range; //是否出界
 
     std::string getString() {
         char buffer[512];

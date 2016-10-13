@@ -24,7 +24,11 @@ static HANDLE		 hReceiveEvent[TOTAL_PORT_NUM]   ={NULL};
 static volatile char chrUARTBuffers[TOTAL_PORT_NUM][UARTBufferLength]={0};
 static volatile unsigned long ulUARTBufferStart[TOTAL_PORT_NUM]={0}, ulUARTBufferEnd[UARTBufferLength]={0};
 
-unsigned short CollectUARTData(const unsigned long ulCOMNo,char chrUARTBufferOutput[])
+class COM {
+
+public:
+
+static unsigned short CollectUARTData(const unsigned long ulCOMNo,char chrUARTBufferOutput[])
 {
 	unsigned long ulLength=0;
 	unsigned long ulEnd ;
@@ -56,7 +60,7 @@ unsigned short CollectUARTData(const unsigned long ulCOMNo,char chrUARTBufferOut
 	return (unsigned short) ulLength;
 }
 
-signed char SendUARTMessageLength(const unsigned long ulChannelNo, const char chrSendBuffer[],const unsigned short usLen)
+static signed char SendUARTMessageLength(const unsigned long ulChannelNo, const char chrSendBuffer[],const unsigned short usLen)
 {
 	DWORD iR;
 	DWORD dwRes;
@@ -82,7 +86,7 @@ signed char SendUARTMessageLength(const unsigned long ulChannelNo, const char ch
 	return 0;
 }
 
-DWORD WINAPI ReceiveCOMData(PVOID pParam)
+static DWORD WINAPI ReceiveCOMData(PVOID pParam)
 {
 	unsigned long uLen;
 	unsigned long ulLen1;
@@ -186,7 +190,7 @@ DWORD WINAPI ReceiveCOMData(PVOID pParam)
 	return 0;
 }
 
-signed char OpenCOMDevice(const unsigned long ulPortNo,const unsigned long ulBaundrate)
+static signed char OpenCOMDevice(const unsigned long ulPortNo,const unsigned long ulBaundrate)
 {
 	DWORD dwThreadID,dwThreadParam;
 	COMSTAT Comstat;
@@ -194,8 +198,10 @@ signed char OpenCOMDevice(const unsigned long ulPortNo,const unsigned long ulBau
 	DWORD dwRes;
 	DCB dcb;
 	COMMTIMEOUTS comTimeOut;
-	TCHAR PortName[10] = {'\\','\\','.','\\','C','O','M',0,0,0};//"\\\\.\\COM";
-	TCHAR chrTemple[5]={0};
+	
+    // [Warning] TCHAR & char 
+    TCHAR PortName[10] = {'\\','\\','.','\\','C','O','M',0,0,0};//"\\\\.\\COM";
+    TCHAR chrTemple[5]={0};
 
 	if(ulPortNo >= TOTAL_PORT_NUM)
 	{
@@ -248,7 +254,7 @@ signed char OpenCOMDevice(const unsigned long ulPortNo,const unsigned long ulBau
 
 } 
 
-signed char SetBaundrate(const unsigned long ulPortNo,const unsigned long ulBaundrate)
+static signed char SetBaundrate(const unsigned long ulPortNo,const unsigned long ulBaundrate)
 {
 
 	DCB dcb;	
@@ -259,7 +265,7 @@ signed char SetBaundrate(const unsigned long ulPortNo,const unsigned long ulBaun
 
 } 
 
-void CloseCOMDevice()
+static void CloseCOMDevice()
 {
 	unsigned char i;
 	for(i=0 ; i<sizeof(ulComMask)*8 ; i++)
@@ -276,3 +282,5 @@ void CloseCOMDevice()
 	}
 	ulComMask = 0;
 }
+
+};

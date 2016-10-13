@@ -4,18 +4,21 @@
 #include <QMainWindow>
 #include <QPainter>
 #include <QTimer>
+#include <QWidget>
+#include <QImage>
+
+#include <opencv2/opencv.hpp>
 
 #include "logic/GameData.h"
 #include "logic/Game.h"
 #include "display/log_reader.hpp"
-
-#include <opencv2/opencv.hpp>
-
-#include <QWidget>
-#include <QImage>
-
 #include "camera/camera_opencv.hpp"
 #include "locator/locator.hpp"
+#include "communication/my_string.hpp"
+#include "communication/serial_port.hpp"
+#include "communication/time_stamp.hpp"
+
+typedef enum { GameWaiting = 0, GameStart = 1, GamePause = 2, GameOver = 3 } GameControlStatus;
 
 namespace Ui {
 	class MainWindow;
@@ -29,7 +32,7 @@ public:
 	explicit MainWindow(QWidget *parent = 0);
 	~MainWindow();
 
-	private slots:
+private slots:
 
 	void change_0();
 	void change_1();
@@ -37,24 +40,28 @@ public:
 	void ui_update();
 	void game_status_change();
 	void next_round();
-	
+	void communicate();
 	void capture_update();
 
 private:
-	Ui::MainWindow *ui;
+    void init_gameData();
+    
+    Ui::MainWindow *ui;
 
-	bool game_status;
+    GameControlStatus status;
 
 	QTimer *timer_ui;            // UI刷新  30Hz
 	QTimer *timer_capture;       // 摄像头，定位  30h
 	QTimer *timer_logic;         //  逻辑 10Hz
 	QTimer *timer_communication; //  通讯 10hz
 
+    // logic
 	LogReader logreader;
 	GameData gameData;
 	Game game;
 
-	void init_gameData();
+    // communicate
+	SerialPort *port;
 
 	// capture
 	QImage	    capture_image;
