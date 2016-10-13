@@ -4,7 +4,9 @@
 
 ## 编译
 
-> **[Warning]** 为了团队开发Qt的方便，我们在一些分支中 gitignore 了 `pro1.vcxproj` 文件。如果需要，可以进入tag `integrate-0` 拷贝和修正之。
+ **[Warning]** 为了团队开发Qt的方便，我们在一些分支中 gitignore 了 `pro1.vcxproj` 和 `opencv241*.props` 文件。如果需要，可以进入tag `integrate-0` 拷贝和修正之。
+
+**[Warning]** 项目需要选择使用Unicode字符集：项目->属性->项目默认值->公共语言运行时支持->使用Unicode字符集
 
 - VS2015
 - Qt 5 for VS2015_64
