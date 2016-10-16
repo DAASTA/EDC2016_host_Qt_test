@@ -54,7 +54,7 @@ public:
 
         // 轮廓提取，确定目标位置
         for (int k = 0; k < target_color_.size(); ++k) {
-            ImageFilter::OpenImage(mask_list[k], 0, 5, 5);
+            ImageFilter::OpenImage(mask_list[k], 0, 6, 6);
 
             ContourList cl;
             cl.SetImage(mask_list[k]);

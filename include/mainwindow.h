@@ -14,6 +14,7 @@
 #include "display/log_reader.hpp"
 #include "camera/camera_opencv.hpp"
 #include "locator/locator.hpp"
+#include "locator/mapper.hpp"
 #include "communication/my_string.hpp"
 #include "communication/serial_port.hpp"
 #include "communication/time_stamp.hpp"
@@ -70,6 +71,9 @@ private:
 	cv::Mat     capture_frame;
 	Locator     locator;
 	std::vector<cv::Point> locator_points;
+
+    // locator 
+    Mapper mapper;
 };
 
 #endif // MAINWINDOW_H

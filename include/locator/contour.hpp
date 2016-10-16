@@ -86,8 +86,8 @@ public:
         double bestDistance = std::numeric_limits<double>::max();
         int bestIdx = -1;
         for (int i=0; i<contour_list_.size(); ++i){
-            // 只有面积大于500才会被认可 TODO
-            if (contour_list_[i].GetSize() < 500) continue;
+            // 只有面积大于某个阈值才会被认可 TODO
+            if (contour_list_[i].GetSize() < 200) continue;
             cv::Point center = contour_list_[i].GetCenterPoint();
             double square_distance = (center.x - point.x)*(center.x - point.x) + (center.y - point.y)*(center.y - point.y);
             if (square_distance < bestDistance) {

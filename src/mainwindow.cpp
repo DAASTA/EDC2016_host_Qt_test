@@ -9,9 +9,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
     ,ui(new Ui::MainWindow)
     ,game("./data/test.txt")
-    ,camera(0, "./data/hd_usb_camera.xml")
+    ,mapper("./data/index_points.txt")
+    ,camera(1, "./data/hd_usb_camera.xml")
     //, camera(0)
-    , capture_timer(NULL)
+    ,capture_timer(NULL)
 {
     ui->setupUi(this);
 
@@ -65,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent) :
         capture_timer->start(20);
 
         locator.addTargetColor(Locator::Red);
-        locator.addTargetColor(Locator::Blue);
+        locator.addTargetColor(Locator::Green);
     }
 
 }
@@ -145,22 +146,33 @@ void MainWindow::ui_update()
     ui->label_air_x->setText(QString::number(gameData.planePoint.x));
     ui->label_air_y->setText(QString::number(gameData.planePoint.y));
     
-    int x0 = 510 - 127;
-    int y0 = 329 - 127;
-    ui->pic_car_0->move(x0 + gameData.carData[0].pos.x, y0 + gameData.carData[0].pos.y);
-    ui->pic_car_1->move(x0 + gameData.carData[1].pos.x, y0 + gameData.carData[1].pos.y);
-    ui->pic_air->move(x0 + gameData.planePoint.x, y0 + gameData.planePoint.y);
+    int x0 = 199 - SIZEPIC / 2;
+    int y0 = 114 - SIZEPIC / 2;
+    cv::Point t;
+
+    t = mapper.MapToImage(gameData.carData[Red].pos.x, gameData.carData[Red].pos.y);
+    ui->pic_car_0->move(x0 + t.x, y0 + t.y);
+
+    t = mapper.MapToImage(gameData.carData[Blue].pos.x, gameData.carData[Blue].pos.y);
+    ui->pic_car_1->move(x0 + t.x, y0 + t.y);
+
+    t = mapper.MapToImage(gameData.planePoint.x, gameData.planePoint.y);
+    ui->pic_air->move(x0 + t.x, y0 + t.y);
+
     if (gameData.targetHealth > 0)
     {
         ui->pic_target->setVisible(true);
-        ui->pic_target->move(x0 + gameData.targetPoint.x, y0 + gameData.targetPoint.y);
+
+        t = mapper.MapToImage(gameData.targetPoint.x, gameData.targetPoint.y);
+        ui->pic_target->move(x0 + t.x, y0 + t.y);
     }
     else
     {
         ui->pic_target->setVisible(false);
     }
     ui->pic_prop->setPixmap(QPixmap(QString(":/image/prop_%1").arg(int(gameData.propType))).scaled(SIZEPIC, SIZEPIC));
-    ui->pic_prop->move(x0 + gameData.propPoint.x, y0 + gameData.propPoint.y);
+    t = mapper.MapToImage(gameData.propPoint.x, gameData.propPoint.y);
+    ui->pic_prop->move(x0 + t.x, y0 + t.y);
 }
 
 void MainWindow::game_status_change()
@@ -245,6 +257,10 @@ void MainWindow::communicate()
         0x0D,
         0x0A }; 
 
+    MyString ms(res, 18);
+
+    ui->Status->setText(ms.hex_str());
+
 	port->send(res, 18);
 
 }
@@ -257,6 +273,32 @@ void MainWindow::init_gameData()
 	gameData.planePoint = Point(255, 255);
 }
 
+static void setPoint(cv::Point& p, Point& pp, bool& out) {
+    
+    out = false;
+
+    pp.x = p.x;
+    if (p.x < 0) {
+        out = true;
+        pp.x = 0;
+    }
+    if (p.x > 255) {
+        out = true;
+        pp.x = 255;
+    }
+
+    pp.y = p.y;
+    if (p.y < 0) {
+        out = true;
+        pp.y = 0;
+    }
+    if (p.y > 255) {
+        out = true;
+        pp.y = 255;
+    }
+
+}
+
 void MainWindow::capture_update()
 {
     if (camera.isValid()) {
@@ -267,7 +309,7 @@ void MainWindow::capture_update()
             static const char* status_label_format = "%dfps"; // frame rate
             static char buffer[512];
             sprintf(buffer, status_label_format, camera.getFrameRate());
-            ui->Status->setText(buffer);
+            //ui->Status->setText(buffer);
 
             // locator
             locator.Refresh(capture_frame);
@@ -277,11 +319,13 @@ void MainWindow::capture_update()
             cv::circle(capture_frame, locator_points[1], 5, cv::Scalar(255, 0, 0), -1);
 
             // set the point
-            gameData.carData[Red].pos.x = locator_points[0].x - 192.5;
-            gameData.carData[Red].pos.y = locator_points[0].y - 112.5;
+            cv::Point t;
 
-            gameData.carData[Blue].pos.x = locator_points[1].x - 192.5;
-            gameData.carData[Blue].pos.y = locator_points[1].y - 112.5;
+            t = mapper.ImageToMap(locator_points[0]);
+            setPoint(t, gameData.carData[Red].pos, gameData.carData[Red].out_of_range);
+            
+            t = mapper.ImageToMap(locator_points[1]);
+            setPoint(t, gameData.carData[Blue].pos, gameData.carData[Blue].out_of_range);
 
             // update image
             capture_image = QImage(

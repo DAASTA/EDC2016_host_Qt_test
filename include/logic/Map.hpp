@@ -28,14 +28,14 @@ public:
 
         for (int i = 0; i < _map_size; ++i)
             for (int j = 0; j < _map_size; ++j)
-                _map[i][j] = getNum(in);
+                _map[j][i] = getNum(in);    //TODO
 
         in >> _targets_size;
 
         _targets.resize(_targets_size);
         for (int i = 0; i < _targets_size; ++i) {
-            _targets[i].x = getNum(in); 
-            _targets[i].y = getNum(in);
+            _targets[i].y = getNum(in); 
+            _targets[i].x = getNum(in); //TODO
         }
 
         in.close();
