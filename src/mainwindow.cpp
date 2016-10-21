@@ -10,17 +10,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ,ui(new Ui::MainWindow)
     ,game("./data/test.txt")
     ,mapper("./data/index_points.txt")
-    ,camera(1, "./data/hd_usb_camera.xml")
+    ,camera(0, "./data/hd_usb_camera.xml")
     //, camera(0)
     ,capture_timer(NULL)
 {
     ui->setupUi(this);
 
-	status = GameWaiting;
-
-	port = new SerialPort(15, 115200/*, protol*/);
+    port = new SerialPort( 3, 115200/*, protol*/);
 
     //QTextCodec::setCodecForLocale(QTextCodec::codecForName("GB2312"));
+
+    // game control
+    status = GameWaiting;
 
     // timer_ui
     timer_ui = new QTimer(this);
@@ -34,8 +35,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // timer_communication
     timer_communication = new QTimer(this);
-	connect(timer_communication, SIGNAL(timeout()), this, SLOT(communicate()));
-	timer_communication->start(100);
+    connect(timer_communication, SIGNAL(timeout()), this, SLOT(communicate()));
+    timer_communication->start(100);
 
     // ui
     connect(ui->pushButton_change_0, SIGNAL(clicked()), this, SLOT(change_0()));
@@ -102,9 +103,9 @@ void MainWindow::change_1()
 void MainWindow::game_reset()
 {
     // ui 
-	ui->pic_target->setVisible(false);
-	ui->pic_air->setVisible(false);
-	ui->pic_prop->setVisible(false);
+    ui->pic_target->setVisible(false);
+    ui->pic_air->setVisible(false);
+    ui->pic_prop->setVisible(false);
     ui->pushButton_start->setText(tr("start"));
 
     // logic
@@ -180,7 +181,7 @@ void MainWindow::game_status_change()
     if (ui->pushButton_start->text() == "start") // TODO  change it to constant
     {
         // game control 
-		status = GameStart;
+        status = GameStart;
 
         // ui
         ui->pic_car_0->setVisible(true);
@@ -196,7 +197,7 @@ void MainWindow::game_status_change()
     else if (ui->pushButton_start->text() == "pause")
     {
         // game control
-		status = GamePause;
+        status = GamePause;
 
         // ui
         ui->pushButton_start->setText(tr("start"));
@@ -259,9 +260,9 @@ void MainWindow::communicate()
 
     MyString ms(res, 18);
 
-    ui->Status->setText(ms.hex_str());
+    //ui->Status->setText(ms.hex_str());
 
-	port->send(res, 18);
+    port->send(res, 18);
 
 }
 
@@ -270,7 +271,7 @@ void MainWindow::init_gameData()
     gameData.round = 0;
     gameData.carData[0] = { 200,Point(0,0) };
     gameData.carData[1] = { 200,Point(0,0) };
-	gameData.planePoint = Point(255, 255);
+    gameData.planePoint = Point(255, 255);
 }
 
 static void setPoint(cv::Point& p, Point& pp, bool& out) {
@@ -309,7 +310,7 @@ void MainWindow::capture_update()
             static const char* status_label_format = "%dfps"; // frame rate
             static char buffer[512];
             sprintf(buffer, status_label_format, camera.getFrameRate());
-            //ui->Status->setText(buffer);
+            ui->Status->setText(buffer);
 
             // locator
             locator.Refresh(capture_frame);
@@ -321,11 +322,15 @@ void MainWindow::capture_update()
             // set the point
             cv::Point t;
 
-            t = mapper.ImageToMap(locator_points[0]);
-            setPoint(t, gameData.carData[Red].pos, gameData.carData[Red].out_of_range);
-            
-            t = mapper.ImageToMap(locator_points[1]);
-            setPoint(t, gameData.carData[Blue].pos, gameData.carData[Blue].out_of_range);
+            if (locator_points[0] != cv::Point(0, 0)) {
+                t = mapper.ImageToMap(locator_points[0]);
+                setPoint(t, gameData.carData[Red].pos, gameData.carData[Red].out_of_range);
+            }
+
+            if (locator_points[1] != cv::Point(0, 0)) {
+                t = mapper.ImageToMap(locator_points[1]);
+                setPoint(t, gameData.carData[Blue].pos, gameData.carData[Blue].out_of_range);
+            }
 
             // update image
             capture_image = QImage(
@@ -334,4 +339,14 @@ void MainWindow::capture_update()
             ui->pic->setPixmap(QPixmap::fromImage(capture_image));
         }
     }
+}
+
+void MainWindow::closeEvent(QCloseEvent *event) {
+
+    status = GameOver;
+
+    communicate();
+
+    QMainWindow::closeEvent(event);
+
 }

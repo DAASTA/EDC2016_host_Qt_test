@@ -6,6 +6,7 @@
 #include <QTimer>
 #include <QWidget>
 #include <QImage>
+#include <QEvent>
 
 #include <opencv2/opencv.hpp>
 
@@ -32,6 +33,9 @@ class MainWindow : public QMainWindow
 public:
 	explicit MainWindow(QWidget *parent = 0);
 	~MainWindow();
+
+protected:
+	void closeEvent(QCloseEvent *event);
 
 private slots:
 
