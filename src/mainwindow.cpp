@@ -8,7 +8,7 @@ const int SIZEPIC = 50;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
     ,ui(new Ui::MainWindow)
-    ,game("./data/test.txt")
+    ,game("./data/map_Èý½ÇÔ².txt")
     ,mapper("./data/index_points.txt")
     ,camera(0, "./data/hd_usb_camera.xml")
     //, camera(0)

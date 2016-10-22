@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pro1", "pro1.vcxproj", "{9A79D8B1-75F0-305E-9F07-276F8166B984}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mapper_calibration", "mapper_calibration.vcxproj", "{394F946B-6BB7-4BCA-8C46-4B040B69A2DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -19,6 +21,12 @@ Global
 		{9A79D8B1-75F0-305E-9F07-276F8166B984}.Release|x64.ActiveCfg = Release|x64
 		{9A79D8B1-75F0-305E-9F07-276F8166B984}.Release|x64.Build.0 = Release|x64
 		{9A79D8B1-75F0-305E-9F07-276F8166B984}.Release|x86.ActiveCfg = Release|x64
+		{394F946B-6BB7-4BCA-8C46-4B040B69A2DA}.Debug|x64.ActiveCfg = Debug|x64
+		{394F946B-6BB7-4BCA-8C46-4B040B69A2DA}.Debug|x64.Build.0 = Debug|x64
+		{394F946B-6BB7-4BCA-8C46-4B040B69A2DA}.Debug|x86.ActiveCfg = Debug|x64
+		{394F946B-6BB7-4BCA-8C46-4B040B69A2DA}.Release|x64.ActiveCfg = Release|x64
+		{394F946B-6BB7-4BCA-8C46-4B040B69A2DA}.Release|x64.Build.0 = Release|x64
+		{394F946B-6BB7-4BCA-8C46-4B040B69A2DA}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
