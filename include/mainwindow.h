@@ -19,6 +19,7 @@
 #include "communication/my_string.hpp"
 #include "communication/serial_port.hpp"
 #include "communication/time_stamp.hpp"
+#include "airplane/dobby.hpp"
 
 typedef enum { GameWaiting = 0, GameStart = 1, GamePause = 2, GameOver = 3 } GameControlStatus;
 
@@ -78,6 +79,9 @@ private:
 
     // locator 
     Mapper mapper;
+
+    // airplane
+    Dobby dobby;
 };
 
 #endif // MAINWINDOW_H

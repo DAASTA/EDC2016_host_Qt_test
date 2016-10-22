@@ -3,12 +3,15 @@
 #include <qpixmap.h>
 //#include <qtextcodec.h>
 
+using namespace std;
+
 const int SIZEPIC = 50;
+const string MAP_FILENAME = "./data/map_Èý½ÇÔ².txt";
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
     ,ui(new Ui::MainWindow)
-    ,game("./data/map_Èý½ÇÔ².txt")
+    ,game(MAP_FILENAME)
     ,mapper("./data/index_points.txt")
     ,camera(0, "./data/hd_usb_camera.xml")
     //, camera(0)
@@ -16,7 +19,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    port = new SerialPort( 3, 115200/*, protol*/);
+    // Serial port
+    char tail[3] = {0x0D, 0x0A, 0};
+    SerialPortProtol protol(5, tail);
+    port = new SerialPort(3, 115200, protol);
 
     //QTextCodec::setCodecForLocale(QTextCodec::codecForName("GB2312"));
 
@@ -109,7 +115,7 @@ void MainWindow::game_reset()
     ui->pushButton_start->setText(tr("start"));
 
     // logic
-    game = Game("./data/test.txt");
+    game = Game(MAP_FILENAME);
     init_gameData();
 
     // game control
@@ -209,6 +215,8 @@ void MainWindow::game_status_change()
 
 void MainWindow::next_round()
 {
+    gameData.planePoint = dobby.GetPos();
+
     game.Refresh(gameData);
     gameData = game.getGameData();
 }
@@ -258,12 +266,20 @@ void MainWindow::communicate()
         0x0D,
         0x0A }; 
 
-    MyString ms(res, 18);
-
+    //MyString ms(res, 18);
     //ui->Status->setText(ms.hex_str());
-
     port->send(res, 18);
 
+
+    // receive
+    vector<MyString> ll = port->receive();
+    for (int i = 0; i < ll.size(); ++i) {
+        MyString& ms = ll[i];
+        if (gameData.carData[ms[0]].air_command) {
+            dobby.SetTarget(Point(ms[1], ms[2]));
+        }
+        ui->Status->setText(ms.hex_str());
+    }
 }
 
 void MainWindow::init_gameData()
@@ -271,7 +287,7 @@ void MainWindow::init_gameData()
     gameData.round = 0;
     gameData.carData[0] = { 200,Point(0,0) };
     gameData.carData[1] = { 200,Point(0,0) };
-    gameData.planePoint = Point(255, 255);
+    gameData.planePoint = dobby.GetPos();
 }
 
 static void setPoint(cv::Point& p, Point& pp, bool& out) {
@@ -304,6 +320,13 @@ void MainWindow::capture_update()
 {
     if (camera.isValid()) {
         capture_frame = camera.getFrame();
+        
+        if (!camera.isValid()) {
+            ui->pic->setText("Camera connection halted.");
+            ui->Status->setText("Failed to connect the camera.");
+            return;
+        }
+
         if (!capture_frame.empty()) {
 
             // update status

@@ -32,14 +32,26 @@ public:
 
     cv::Mat getFrame() {
 
-        capture >> frame;
+        try {
+            capture >> frame;
+        }
+        catch (...) {
+            valid = false;
+            return cv::Mat::zeros(480, 640, CV_8UC3);
+        }
         frame_rate = fps.getFrameRate();
 
         if (!undistort_enabled)
             return frame;
         else {
-            cv::remap(frame, undistort_frame, undistort_map1, undistort_map2, CV_INTER_LINEAR);
-            return undistort_frame;
+            try {
+                cv::remap(frame, undistort_frame, undistort_map1, undistort_map2, CV_INTER_LINEAR);
+                return undistort_frame;
+            }
+            catch (...) {
+                valid = false;
+                return cv::Mat::zeros(480, 640, CV_8UC3);
+            }
         }
     }
     

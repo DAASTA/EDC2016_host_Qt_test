@@ -167,6 +167,9 @@
     <ClInclude Include="include\locator\mapper.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\airplane\dobby.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="image\car_2.png">

@@ -18,15 +18,40 @@ class SerialPortProtol {
 
 public:
     SerialPortProtol() 
-        : no_protol(true)
+        : no_protol_(true)
     {
     }
     SerialPortProtol(std::vector<std::string> header_list, int length) 
         : header_list_(header_list)
         , length_(length)
-        , no_protol(false)
+        , no_protol_(false)
+        , header_protol(true)
     {
-        if (length_ <= 0) no_protol = true;
+        if (length_ <= 0) no_protol_ = true;
+    }
+    SerialPortProtol(std::string header, int length)
+        : length_(length)
+        , no_protol_(false)
+        , header_protol(true)
+    {
+        header_list_.push_back(header);
+        if (length_ <= 0) no_protol_ = true;
+    }
+    SerialPortProtol(int length, std::vector<std::string> tail_list) 
+        : tail_list_(tail_list)
+        , length_(length)
+        , no_protol_(false)
+        , header_protol(false)
+    {
+        if (length <= 0) no_protol_ = true;
+    }
+    SerialPortProtol(int length, std::string tail)
+        : length_(length)
+        , no_protol_(false)
+        , header_protol(false)
+    {
+        tail_list_.push_back(tail);
+        if (length <= 0) no_protol_ = true;
     }
 
     ~SerialPortProtol() {
@@ -36,39 +61,64 @@ public:
     {
         std::vector<MyString> list;
         if (len <= 0) return list;
-        if (no_protol) {
+        if (no_protol_) {
             list.push_back(MyString(line, len));
             len = 0;
             return list;
         }
 
-        int offset = 0;
-        while (len - offset > length_) {
-            if (checkHeader(line + offset)) {
-                list.push_back(MyString(line + offset, length_));
-                offset += length_;
+        if (header_protol) { // protol of the head
+            int offset = 0;
+            while (len - offset > length_) {
+                if (checkHeader(line + offset)) {
+                    list.push_back(MyString(line + offset, length_));
+                    offset += length_;
+                }
+                else {
+                    offset += 1;
+                }
             }
-            else {
-                offset += 1;
-            }
+            for (int i = offset; i < len; ++i) line[i - offset] = line[i];
+            len -= offset;
+            return list;
         }
-        for (int i = offset; i < len; ++i) line[i - offset] = line[i];
-        len -= offset;
-
-        return list;
+        else {  // protol of the tail
+            int offset = 0;
+            while (len - offset > length_) {
+                if (checkTail(line + offset)) {
+                    list.push_back(MyString(line + offset, length_));
+                    offset += length_;
+                }
+                else {
+                    offset += 1;
+                }
+            }
+            for (int i = offset; i < len; ++i) line[i - offset] = line[i];
+            len -= offset;
+            return list;
+        }
     }
 
     inline int getLength() { return length_; }
 
 private:
-    bool no_protol;
+    bool no_protol_;
+    bool header_protol;
     std::vector<std::string> header_list_;
+    std::vector<std::string> tail_list_;
     int length_;
 
     bool checkHeader(const char* line) {
         if (header_list_.size() == 0) return true;
         for (int i = 0; i < header_list_.size(); ++i)
             if (header_list_[i].compare(0, std::string::npos, line, header_list_[i].length()) == 0)
+                return true;
+        return false;
+    }
+    bool checkTail(const char* line) {
+        if (tail_list_.size() == 0) return true;
+        for (int i = 0; i < tail_list_.size(); ++i)
+            if (tail_list_[i].compare(length_ - tail_list_[i].length(), std::string::npos, line, tail_list_[i].length()) == 0)
                 return true;
         return false;
     }

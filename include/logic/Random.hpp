@@ -19,5 +19,6 @@ public:
         }
     }
     int Rand() { return rand(); }
+    int Rand(int n) { return rand() % n; }
 };
 

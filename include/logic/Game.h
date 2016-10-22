@@ -21,7 +21,7 @@ class Game {
 
 
 public:
-    Game(std::string filename = "./data/test.txt");
+    Game(std::string filename);
 
     void Refresh(const Point& p1, const Point& p2, const Point& pp);//Ë¢ÐÂPlane, carsÎ»ÖÃ
     void Refresh(const GameData& gamedata);
