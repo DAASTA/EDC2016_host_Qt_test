@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // timer_logic
     timer_logic = new QTimer(this);
-    connect(timer_logic, SIGNAL(timeout()), this, SLOT(next_round()));
+    connect(timer_logic, SIGNAL(timeout()), this, SLOT(logic_update()));
     //timer_logic->start(100); 
 
     // timer_communication
@@ -141,7 +141,7 @@ void MainWindow::ui_update()
     ui->label_x_1->setText(QString::number(gameData.carData[1].pos.x));
     ui->label_y_1->setText(QString::number(gameData.carData[1].pos.y));
     ui->label_hp_1->setText(QString::number(gameData.carData[1].health));
-    ui->label_TeamName_1->setText("Team Blue");
+    ui->label_TeamName_1->setText("Team Green");
     
     ui->label_prop_type->setText(QString::number(int(gameData.propType)));
     ui->label_prop_x->setText(QString::number(gameData.propPoint.x));
@@ -157,10 +157,10 @@ void MainWindow::ui_update()
     int y0 = 114 - SIZEPIC / 2;
     cv::Point t;
 
-    t = mapper.MapToImage(gameData.carData[Red].pos.x, gameData.carData[Red].pos.y);
+    t = mapper.MapToImage(gameData.carData[0].pos.x, gameData.carData[0].pos.y);
     ui->pic_car_0->move(x0 + t.x, y0 + t.y);
 
-    t = mapper.MapToImage(gameData.carData[Blue].pos.x, gameData.carData[Blue].pos.y);
+    t = mapper.MapToImage(gameData.carData[1].pos.x, gameData.carData[1].pos.y);
     ui->pic_car_1->move(x0 + t.x, y0 + t.y);
 
     t = mapper.MapToImage(gameData.planePoint.x, gameData.planePoint.y);
@@ -213,9 +213,11 @@ void MainWindow::game_status_change()
     }
 }
 
-void MainWindow::next_round()
+void MainWindow::logic_update()
 {
-    gameData.planePoint = dobby.GetPos();
+    if (!gameData.carData[0].air_command && !gameData.carData[1].air_command) {
+        dobby.SetTarget(gameData.targetPoint);
+    }
 
     game.Refresh(gameData);
     gameData = game.getGameData();
@@ -318,12 +320,16 @@ static void setPoint(cv::Point& p, Point& pp, bool& out) {
 
 void MainWindow::capture_update()
 {
+    gameData.planePoint = dobby.GetPos();
+
     if (camera.isValid()) {
         capture_frame = camera.getFrame();
         
         if (!camera.isValid()) {
             ui->pic->setText("Camera connection halted.");
-            ui->Status->setText("Failed to connect the camera.");
+            ui->Status->setText("Camera connection halted.");
+            status = GameOver;
+            timer_logic->stop();
             return;
         }
 
@@ -340,19 +346,19 @@ void MainWindow::capture_update()
             locator_points = locator.getTargetPoints();
 
             cv::circle(capture_frame, locator_points[0], 5, cv::Scalar(0, 0, 255), -1);
-            cv::circle(capture_frame, locator_points[1], 5, cv::Scalar(255, 0, 0), -1);
+            cv::circle(capture_frame, locator_points[1], 5, cv::Scalar(0, 255, 0), -1);
 
             // set the point
             cv::Point t;
 
             if (locator_points[0] != cv::Point(0, 0)) {
                 t = mapper.ImageToMap(locator_points[0]);
-                setPoint(t, gameData.carData[Red].pos, gameData.carData[Red].out_of_range);
+                setPoint(t, gameData.carData[0].pos, gameData.carData[0].out_of_range);
             }
 
             if (locator_points[1] != cv::Point(0, 0)) {
                 t = mapper.ImageToMap(locator_points[1]);
-                setPoint(t, gameData.carData[Blue].pos, gameData.carData[Blue].out_of_range);
+                setPoint(t, gameData.carData[1].pos, gameData.carData[1].out_of_range);
             }
 
             // update image

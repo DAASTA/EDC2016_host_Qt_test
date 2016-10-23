@@ -45,7 +45,7 @@ private slots:
 	void game_reset();
 	void ui_update();
 	void game_status_change();
-	void next_round();
+	void logic_update();
 	void communicate();
 	void capture_update();
 

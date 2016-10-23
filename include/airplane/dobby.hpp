@@ -15,8 +15,8 @@ public:
     inline void SetTarget(Point p) { target_ = p; }
     
     inline Point GetPos() {
-        int dx = random.Rand(3);
-        int dy = random.Rand(3);
+        int dx = random.Rand(2);
+        int dy = random.Rand(2);
 
         if (pos_.x > target_.x) dx = -dx;
         if (pos_.y > target_.y) dy = -dy;

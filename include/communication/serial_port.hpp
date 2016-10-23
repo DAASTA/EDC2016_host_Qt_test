@@ -118,7 +118,7 @@ private:
     bool checkTail(const char* line) {
         if (tail_list_.size() == 0) return true;
         for (int i = 0; i < tail_list_.size(); ++i)
-            if (tail_list_[i].compare(length_ - tail_list_[i].length(), std::string::npos, line, tail_list_[i].length()) == 0)
+            if (tail_list_[i].compare(0, std::string::npos, line + length_ - tail_list_[i].length(), tail_list_[i].length()) == 0)
                 return true;
         return false;
     }

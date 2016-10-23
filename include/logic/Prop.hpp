@@ -10,24 +10,24 @@ class Prop {
 
 public:
 
-	Prop()
-		: _waiting_count(0)
+    Prop()
+        : _waiting_count(0)
         , _waiting_count_waste(0)
         , _prop(PropET)
-	{
-	}
+    {
+    }
 
-	// 如果道具需要刷新，返回true；否则返回false
-	bool Refresh() {
+    // 如果道具需要刷新，返回true；否则返回false
+    bool Refresh() {
 
 
-		if (PropET == _prop) {
-			++_waiting_count;
-			if (_waiting_count >= PROP_CD) {
-				_waiting_count = 0;
-				return true;
-			}
-		}
+        if (PropET == _prop) {
+            ++_waiting_count;
+            if (_waiting_count >= PROP_CD) {
+                _waiting_count = 0;
+                return true;
+            }
+        }
         else {
             ++_waiting_count_waste;
             if (_waiting_count_waste >= PROP_ABANDON) {
@@ -36,8 +36,8 @@ public:
             }
         }
 
-		return false;
-	}
+        return false;
+    }
 
     void Consume() {
         _waiting_count = 0;
@@ -45,13 +45,16 @@ public:
         _prop = PropET;
     }
 
-	void Generate(std::vector<Point> avoid_point_list, int _map_size) {
-		// 产生一个道具，而且不能非常靠近传进来的几个点(小车,目标点什么的)
+    void Generate(std::vector<Point> avoid_point_list, int _map_size) {
+        // 产生一个道具，而且不能非常靠近传进来的几个点(小车,目标点什么的)
 
         _waiting_count_waste = 0;
         _waiting_count = 0;
 
-        _prop = (PropType)(_random.Rand() % (PROP_SIZE - 1) + 1); // 避免0号NULL道具
+        do {
+            _prop = (PropType)(_random.Rand() % (PROP_SIZE - 1) + 1); // 避免0号NULL道具
+        } while (_last_prop == _prop);
+        _last_prop = _prop;
 
         if (_prop != PropBW) {
             for (int i = 0; i < 10; i++)
@@ -90,24 +93,25 @@ public:
             }
         }
 
-	
-	}
+    
+    }
 
-	bool CheckPoint(Point p) { //检查此点是否距离 _point 足够近
+    bool CheckPoint(Point p) { //检查此点是否距离 _point 足够近
 
         return PropET != _prop && p.getDistance(_point) < RADIUS_PROP;
-	}
+    }
 
-	inline Point getPoint() const { return _point; }
-	inline PropType getPropType() const { return _prop; }
+    inline Point getPoint() const { return _point; }
+    inline PropType getPropType() const { return _prop; }
 
 private:
 
-	Point _point;
-	PropType _prop;
+    Point _point;
+    PropType _prop;
+    PropType _last_prop;
 
-	Random _random;
+    Random _random;
 
-	int _waiting_count;
+    int _waiting_count;
     int _waiting_count_waste;
 };
