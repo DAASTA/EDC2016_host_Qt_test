@@ -41,6 +41,8 @@ void Game::Refresh(const Point & pcar1, const Point & pcar2, const Point & pplan
 
 void Game::Refresh(const GameData& gamedata)
 {
+    if (_game_status != Running) return;
+
     _car[Red].SetHealth(gamedata.carData[Red].health);
     _car[Blue].SetHealth(gamedata.carData[Blue].health);
 
@@ -107,56 +109,65 @@ void Game::Attack(CarName car_name, bool critical)
 }
 
 void Game::SettleDamage() {
-    Point r_pos = _car[Red].GetPoint();
-    Point b_pos = _car[Blue].GetPoint();
 
-    if (_map.HaveTarget()) {
+    if (TARGET_NONEXISTENT) {
+        Point r_pos = _car[0].GetPoint();
+        Point b_pos = _car[1].GetPoint();
 
-        Point tid_pos = _map.GetTargetPoint();
-        unsigned char tower_color = _map.GetPointColor(tid_pos)
-            , r_color = _map.GetPointColor(r_pos)
-            , b_color = _map.GetPointColor(b_pos);
-        double r_distance = r_pos.getDistance(tid_pos)
-            , b_distance = b_pos.getDistance(tid_pos);
-        bool critical = (r_color == tower_color && r_distance <= RADIUS_CRITICAL)
-            || (b_color == tower_color && b_distance <= RADIUS_CRITICAL);
+        Attack(Red, _map.GetPointColor(r_pos) == 0);
+        Attack(Blue, _map.GetPointColor(b_pos) == 0);
+    }
+    else {
+        Point r_pos = _car[Red].GetPoint();
+        Point b_pos = _car[Blue].GetPoint();
 
-        if (r_color == tower_color && b_color == tower_color) { //都位于正确颜色
-            if (r_distance == b_distance) { //都位于正确颜色，且两者距离相等
+        if (_map.HaveTarget()) {
+
+            Point tid_pos = _map.GetTargetPoint();
+            unsigned char tower_color = _map.GetPointColor(tid_pos)
+                , r_color = _map.GetPointColor(r_pos)
+                , b_color = _map.GetPointColor(b_pos);
+            double r_distance = r_pos.getDistance(tid_pos)
+                , b_distance = b_pos.getDistance(tid_pos);
+            bool critical = (r_color == tower_color && r_distance <= RADIUS_CRITICAL)
+                || (b_color == tower_color && b_distance <= RADIUS_CRITICAL);
+
+            if (r_color == tower_color && b_color == tower_color) { //都位于正确颜色
+                if (r_distance == b_distance) { //都位于正确颜色，且两者距离相等
+                    Attack(Red, critical);
+                    Attack(Blue, critical);
+                }
+                else { //都位于正确颜色，且两者距离不相等
+                    if (r_distance < b_distance) Attack(Blue, critical);
+                    else  Attack(Red, critical);
+                }
+            }
+            else if (r_color != tower_color && b_color != tower_color) { //都位于错误颜色
                 Attack(Red, critical);
                 Attack(Blue, critical);
             }
-            else { //都位于正确颜色，且两者距离不相等
-                if (r_distance < b_distance) Attack(Blue, critical);
-                else  Attack(Red, critical);
+            else {
+                if (r_color == tower_color) Attack(Blue, critical); //只有红方位于正确色区
+                else Attack(Red, critical); //只有蓝方位于正确色区
             }
         }
-        else if (r_color != tower_color && b_color != tower_color) { //都位于错误颜色
-            Attack(Red, critical);
-            Attack(Blue, critical);
-        }
-        else {
-            if (r_color == tower_color) Attack(Blue, critical); //只有红方位于正确色区
-            else Attack(Red, critical); //只有蓝方位于正确色区
+
+        switch (_plane.GetPlaneStatus()) {
+        case PlaneNone:
+            break;
+        case PlaneAttack:
+            if (_plane.IsInAttackRange(r_pos)) _car[Red].AttackedByPlane();
+            if (_plane.IsInAttackRange(b_pos)) _car[Blue].AttackedByPlane();
+            break;
+        case PlaneHeal:
+            if (_plane.IsInHealRange(r_pos)) _car[Red].HealedByPlane();
+            if (_plane.IsInHealRange(b_pos)) _car[Blue].HealedByPlane();
+            break;
+        default:
+            cout << "[Error] Unknown Plane Status!" << _plane.GetPlaneStatus() << endl;
+            system("pause");
         }
     }
-
-    switch (_plane.GetPlaneStatus()) {
-    case PlaneNone:
-        break;
-    case PlaneAttack:
-        if (_plane.IsInAttackRange(r_pos)) _car[Red].AttackedByPlane();
-        if (_plane.IsInAttackRange(b_pos)) _car[Blue].AttackedByPlane();
-        break;
-    case PlaneHeal:
-        if (_plane.IsInHealRange(r_pos)) _car[Red].HealedByPlane();
-        if (_plane.IsInHealRange(b_pos)) _car[Blue].HealedByPlane();
-        break;
-    default:
-        cout << "[Error] Unknown Plane Status!" << _plane.GetPlaneStatus() << endl;
-        system("pause");
-    }
-
 }
 
 void Game::GenerateProp()
@@ -166,6 +177,12 @@ void Game::GenerateProp()
 	point_list.push_back(_car[Blue].GetPoint());
 	point_list.push_back(_map.GetTargetPoint());
 	_prop.Generate(point_list, _map.GetMapSize()); 
+
+    if (PROP_ALWAYS_HP) {
+        while (_map.GetPointColor(_prop.getPoint()) == 0) {
+            _prop.Generate(point_list, _map.GetMapSize());
+        }
+    }
 }
 
 void Game::Judge()
@@ -175,8 +192,7 @@ void Game::Judge()
 
     if (_round_count < MAX_ROUND) //当比赛还有剩余时间
     {
-		
-		
+        if (!LIMITED_HP) return;
 
 		if (_car[Red].IsAlive() && _car[Blue].IsAlive()) //比赛继续
         {

@@ -43,7 +43,7 @@ public:
 
     //×Ô¼ì
     void CheckHP() {
-        if (_health > HP_INITIAL) _health = HP_INITIAL;
+        if (_health > HP_INITIAL && LIMITED_HP) _health = HP_INITIAL;
     }
 
     ////////////////////////////////¹¥»÷

@@ -6,14 +6,14 @@
 using namespace std;
 
 const int SIZEPIC = 50;
-const string MAP_FILENAME = "./data/map_Èý½ÇÔ².txt";
+const string MAP_FILENAME = "./data/map_Ô¤Éó.txt";
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
     ,ui(new Ui::MainWindow)
     ,game(MAP_FILENAME)
     ,mapper("./data/index_points.txt")
-    ,camera(0, "./data/hd_usb_camera.xml")
+    ,camera(1, "./data/hd_usb_camera.xml")
     //, camera(0)
     ,capture_timer(NULL)
 {
@@ -146,13 +146,14 @@ void MainWindow::ui_update()
     ui->label_prop_type->setText(QString::number(int(gameData.propType)));
     ui->label_prop_x->setText(QString::number(gameData.propPoint.x));
     ui->label_prop_y->setText(QString::number(gameData.propPoint.y));
+
     ui->label_tower_x->setText(QString::number(gameData.targetPoint.x));
     ui->label_tower_y->setText(QString::number(gameData.targetPoint.y));
     ui->label_tower_color->setText(QString::number((int)(gameData.planeStatus)));
     ui->label_air_status->setText(QString::number(int(gameData.planeStatus)));
     ui->label_air_x->setText(QString::number(gameData.planePoint.x));
     ui->label_air_y->setText(QString::number(gameData.planePoint.y));
-    
+
     int x0 = 199 - SIZEPIC / 2;
     int y0 = 114 - SIZEPIC / 2;
     cv::Point t;
@@ -163,20 +164,19 @@ void MainWindow::ui_update()
     t = mapper.MapToImage(gameData.carData[1].pos.x, gameData.carData[1].pos.y);
     ui->pic_car_1->move(x0 + t.x, y0 + t.y);
 
-    t = mapper.MapToImage(gameData.planePoint.x, gameData.planePoint.y);
-    ui->pic_air->move(x0 + t.x, y0 + t.y);
-
-    if (gameData.targetHealth > 0)
-    {
-        ui->pic_target->setVisible(true);
-
-        t = mapper.MapToImage(gameData.targetPoint.x, gameData.targetPoint.y);
-        ui->pic_target->move(x0 + t.x, y0 + t.y);
+    if (!TARGET_NONEXISTENT) {
+        t = mapper.MapToImage(gameData.planePoint.x, gameData.planePoint.y);
+        ui->pic_air->move(x0 + t.x, y0 + t.y);
+        if (gameData.targetHealth > 0) {
+            ui->pic_target->setVisible(true);
+            t = mapper.MapToImage(gameData.targetPoint.x, gameData.targetPoint.y);
+            ui->pic_target->move(x0 + t.x, y0 + t.y);
+        }
+        else {
+            ui->pic_target->setVisible(false);
+        }
     }
-    else
-    {
-        ui->pic_target->setVisible(false);
-    }
+
     ui->pic_prop->setPixmap(QPixmap(QString(":/image/prop_%1").arg(int(gameData.propType))).scaled(SIZEPIC, SIZEPIC));
     t = mapper.MapToImage(gameData.propPoint.x, gameData.propPoint.y);
     ui->pic_prop->move(x0 + t.x, y0 + t.y);
@@ -192,8 +192,12 @@ void MainWindow::game_status_change()
         // ui
         ui->pic_car_0->setVisible(true);
         ui->pic_car_1->setVisible(true);
-        ui->pic_target->setVisible(true);
-        ui->pic_air->setVisible(true);
+        
+        if (!TARGET_NONEXISTENT) {
+            ui->pic_target->setVisible(true);
+            ui->pic_air->setVisible(true);
+        }
+
         ui->pic_prop->setVisible(true);
         ui->pushButton_start->setText(tr("pause"));
 
@@ -218,6 +222,8 @@ void MainWindow::logic_update()
     if (!gameData.carData[0].air_command && !gameData.carData[1].air_command) {
         dobby.SetTarget(gameData.targetPoint);
     }
+    for (int i = 0; i < 2; ++i)
+        if (gameData.carData[i].out_of_range) gameData.carData[i].health -= OUT_OF_RANGE;
 
     game.Refresh(gameData);
     gameData = game.getGameData();

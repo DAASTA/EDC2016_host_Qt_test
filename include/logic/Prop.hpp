@@ -53,7 +53,10 @@ public:
 
         do {
             _prop = (PropType)(_random.Rand() % (PROP_SIZE - 1) + 1); // 避免0号NULL道具
-        } while (_last_prop == _prop);
+        } while (_last_prop == _prop);  // 必然和上一次道具不一样
+
+        if (PROP_ALWAYS_HP) _prop = PropHP;  // 是否锁定为 +HP 道具
+
         _last_prop = _prop;
 
         if (_prop != PropBW) {
@@ -92,7 +95,6 @@ public:
                 if (flag) break;
             }
         }
-
     
     }
 

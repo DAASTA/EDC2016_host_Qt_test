@@ -20,6 +20,7 @@ public:
 	}
 
 	bool Refresh() { 
+
 		if (!_alive) {
 			++_waiting_count;
 			if (_waiting_count >= TARGET_CD) {
@@ -30,9 +31,18 @@ public:
 		return false;
 	} //refresh
 
-    void ShortAttack() { _health -= MAP_SHORT_ATTACK; _alive = _health > 0; }//½üÕ½¼õÑª
-    void LongAttack() { _health -= MAP_LONG_ATTACK; _alive = _health > 0; }//Ô¶Õ½¼õÑª
-    void Attack(bool critical) { if (critical) ShortAttack(); else LongAttack(); } //Ô¶/½ü¼õÑª
+    void ShortAttack() { //½üÕ½¼õÑª
+        if (!TARGET_NONEXISTENT) _health -= MAP_SHORT_ATTACK;
+        _alive = _health > 0; 
+    }
+    void LongAttack() { //Ô¶Õ½¼õÑª
+        if (!TARGET_NONEXISTENT) _health -= MAP_LONG_ATTACK; 
+        _alive = _health > 0; 
+    }
+    void Attack(bool critical) { //Ô¶/½ü¼õÑª
+        if (critical) ShortAttack(); 
+        else LongAttack(); 
+    } 
 
 	inline double GetHealth() const { return _health; }//·µ»ØÑªÁ¿
 	inline bool isAlive() const { return _alive;  }

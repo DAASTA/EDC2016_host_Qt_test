@@ -51,7 +51,15 @@ public:
 		
 		// _target
 		_target.Reset();
-		
+
+        if (TARGET_NONEXISTENT) {
+            for (int i=0; i<_targets_size; ++i)
+                if (GetPointColor(_targets[_tid])) {
+                    _tid = i;
+                    return;
+                }
+        }
+
 		// _tid
 		if (reverse)
 		{
@@ -95,7 +103,7 @@ public:
         if (critical) ShortAttack(); else LongAttack();
     }
 
-    inline unsigned char GetPointColor(const Point& p) const { return _map[int(p.x)][int(p.y)]; }//return 0 or 255 in the map
+    inline unsigned char GetPointColor(const Point& p) const { return _map[int(p.x)][int(p.y)]; }//return 0 or 1 in the map
     inline Point GetTargetPoint() const { return _targets[_tid]; }//return _tid
     inline double GetTargetHealth() const { return _target.GetHealth(); }//return ËþµÄÑªÁ¿
 	inline int GetMapSize() const { return _map_size; }
