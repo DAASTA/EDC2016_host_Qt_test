@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <qpixmap.h>
-//#include <qtextcodec.h>
 
 using namespace std;
 
@@ -22,9 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // Serial port
     char tail[3] = {0x0D, 0x0A, 0};
     SerialPortProtol protol(5, tail);
-    port = new SerialPort(3, 115200, protol);
-
-    //QTextCodec::setCodecForLocale(QTextCodec::codecForName("GB2312"));
+    port = new SerialPort(12, 115200, protol);
 
     // game control
     status = GameWaiting;
@@ -41,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // timer_communication
     timer_communication = new QTimer(this);
-    connect(timer_communication, SIGNAL(timeout()), this, SLOT(communicate()));
+    connect(timer_communication, SIGNAL(timeout()), this, SLOT(communicate_update()));
     timer_communication->start(100);
 
     // ui
@@ -225,27 +222,29 @@ void MainWindow::logic_update()
     for (int i = 0; i < 2; ++i)
         if (gameData.carData[i].out_of_range) gameData.carData[i].health -= OUT_OF_RANGE;
 
-    game.Refresh(gameData);
-    gameData = game.getGameData();
+    if (game.GetGameStatus() == Running) {
+        game.Refresh(gameData);
+        gameData = game.getGameData();
+    }
 }
 
-void MainWindow::communicate()
+void MainWindow::communicate_update()
 {
     char mes[4] = { 0 };
     mes[0] = (gameData.carData[0].long_attack_map ? 1 : 0) << 7
-        | (gameData.carData[1].long_attack_map ? 1 : 0) << 6
-        | (gameData.carData[0].short_attack_map ? 1 : 0) << 5
-        | (gameData.carData[1].short_attack_map ? 1 : 0) << 4
+        | (gameData.carData[0].short_attack_map ? 1 : 0) << 6
+        | (gameData.carData[0].air_command ? 1 : 0) << 5
+        | (gameData.carData[0].heal_plane ? 1 : 0) << 4
         | (gameData.carData[0].attack_plane ? 1 : 0) << 3
-        | (gameData.carData[1].attack_plane ? 1 : 0) << 2
+        | (gameData.carData[0].out_of_range ? 1 : 0) << 2
         | status;
 
-    mes[1] = (gameData.carData[0].out_of_range ? 1 : 0) << 7
-        | (gameData.carData[1].out_of_range ? 1 : 0) << 6
-        | (gameData.carData[0].air_command ? 1 : 0) << 5
-        | (gameData.carData[1].air_command ? 1 : 0) << 4
-        | (gameData.carData[0].heal_plane ? 1 : 0) << 3
-        | (gameData.carData[1].heal_plane ? 1 : 0) << 2
+    mes[1] = (gameData.carData[1].long_attack_map ? 1 : 0) << 7
+        | (gameData.carData[1].short_attack_map ? 1 : 0) << 6
+        | (gameData.carData[1].air_command ? 1 : 0) << 5
+        | (gameData.carData[1].heal_plane ? 1 : 0) << 4
+        | (gameData.carData[1].attack_plane ? 1 : 0) << 3
+        | (gameData.carData[1].out_of_range ? 1 : 0) << 2
         | (gameData.targetHealth > 0 ? 1 : 0) << 1
         | gameData.planeStatus;
 
@@ -274,19 +273,22 @@ void MainWindow::communicate()
         0x0D,
         0x0A }; 
 
-    //MyString ms(res, 18);
-    //ui->Status->setText(ms.hex_str());
+    MyString ms(res, 18);
+    ui->Status->setText(ms.hex_str());
     port->send(res, 18);
 
 
     // receive
     vector<MyString> ll = port->receive();
-    for (int i = 0; i < ll.size(); ++i) {
-        MyString& ms = ll[i];
-        if (gameData.carData[ms[0]].air_command) {
-            dobby.SetTarget(Point(ms[1], ms[2]));
+    if (ll.size() > 0)
+    {
+        MyString& ms = ll[ll.size() - 1];
+        if (ms.length() == 3) {
+            if (gameData.carData[ms[0]].air_command) {
+                dobby.SetTarget(Point(ms[1], ms[2]));
+            }
         }
-        ui->Status->setText(ms.hex_str());
+        //ui->Status->setText(ms.hex_str());
     }
 }
 
@@ -345,7 +347,7 @@ void MainWindow::capture_update()
             static const char* status_label_format = "%dfps"; // frame rate
             static char buffer[512];
             sprintf(buffer, status_label_format, camera.getFrameRate());
-            ui->Status->setText(buffer);
+            if (camera.getFrameRate()<20) ui->Status->setText(buffer);
 
             // locator
             locator.Refresh(capture_frame);
@@ -380,7 +382,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 
     status = GameOver;
 
-    communicate();
+    communicate_update();
 
     QMainWindow::closeEvent(event);
 

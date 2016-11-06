@@ -13,7 +13,7 @@ public:
 
     // 一些需要实测才能确定的 Hoe 值
     enum HsvColor {
-        Green = 60,
+        Green = 65,
         Blue = 115,
         Red = 175
     };
@@ -75,8 +75,5 @@ private:
     std::vector<double> target_color_;
     double threshold_;
 
-    const static int RED = 175;
-    const static int BLUE = 115;
-    const static int GREEN = 60;
     const static int THRESHOLD = 10;
 };

@@ -56,7 +56,7 @@ void write_to_file() {
 int main()
 {
 
-    Camera camera(0, "./data/hd_usb_camera.xml");
+    Camera camera(1, "./data/hd_usb_camera.xml");
     
     Mat frame;
     Mat photo;

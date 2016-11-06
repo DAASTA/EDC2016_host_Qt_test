@@ -46,7 +46,7 @@ private slots:
 	void ui_update();
 	void game_status_change();
 	void logic_update();
-	void communicate();
+	void communicate_update();
 	void capture_update();
 
 private:
