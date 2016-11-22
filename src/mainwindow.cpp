@@ -5,6 +5,7 @@
 using namespace std;
 
 const int SIZEPIC = 50;
+const int SIZESYM = 90;
 const string MAP_FILENAME = "./data/map_Ô¤Éó.txt";
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -27,129 +28,157 @@ MainWindow::MainWindow(QWidget *parent) :
     status = GameWaiting;
 
     // timer_ui
-    timer_ui = new QTimer(this);
-    connect(timer_ui, SIGNAL(timeout()), this, SLOT(ui_update()));
-    timer_ui->start(33);
+timer_ui = new QTimer(this);
+connect(timer_ui, SIGNAL(timeout()), this, SLOT(ui_update()));
+timer_ui->start(33);
 
-    // timer_logic
-    timer_logic = new QTimer(this);
-    connect(timer_logic, SIGNAL(timeout()), this, SLOT(logic_update()));
-    //timer_logic->start(100); 
+// timer_logic
+timer_logic = new QTimer(this);
+connect(timer_logic, SIGNAL(timeout()), this, SLOT(logic_update()));
+//timer_logic->start(100); 
 
-    // timer_communication
-    timer_communication = new QTimer(this);
-    connect(timer_communication, SIGNAL(timeout()), this, SLOT(communicate_update()));
-    timer_communication->start(100);
+// timer_communication
+timer_communication = new QTimer(this);
+connect(timer_communication, SIGNAL(timeout()), this, SLOT(communicate_update()));
+timer_communication->start(100);
 
-    // ui
-    connect(ui->pushButton_change_0, SIGNAL(clicked()), this, SLOT(change_0()));
-    connect(ui->pushButton_change_1, SIGNAL(clicked()), this, SLOT(change_1()));
-    connect(ui->pushButton_reset, SIGNAL(clicked()), this, SLOT(game_reset()));
-    connect(ui->pushButton_start, SIGNAL(clicked()), this, SLOT(game_status_change()));
-    ui->pic_car_0->setPixmap(QPixmap(":/image/car_0").scaled(SIZEPIC, SIZEPIC));
-    ui->pic_car_1->setPixmap(QPixmap(":/image/car_1").scaled(SIZEPIC, SIZEPIC));
-    ui->pic_target->setPixmap(QPixmap(":/image/star").scaled(SIZEPIC, SIZEPIC));
-    ui->pic_air->setPixmap(QPixmap(":/image/ufo").scaled(SIZEPIC, SIZEPIC));
-    ui->pic_car_0->setVisible(false);
-    ui->pic_car_1->setVisible(false);
-    ui->pic_target->setVisible(false);
-    ui->pic_air->setVisible(false);
-    ui->pic_prop->setVisible(false);
-    
-    // init logic
-    init_gameData();
+// ui
+connect(ui->pushButton_change_0, SIGNAL(clicked()), this, SLOT(change_0()));
+connect(ui->pushButton_change_1, SIGNAL(clicked()), this, SLOT(change_1()));
+connect(ui->pushButton_reset, SIGNAL(clicked()), this, SLOT(game_reset()));
+connect(ui->pushButton_start, SIGNAL(clicked()), this, SLOT(game_status_change()));
+ui->pic_car_0->setPixmap(QPixmap(":/image/car_0").scaled(SIZEPIC, SIZEPIC));
+ui->pic_car_1->setPixmap(QPixmap(":/image/car_1").scaled(SIZEPIC, SIZEPIC));
+ui->pic_target->setPixmap(QPixmap(":/image/star").scaled(SIZEPIC, SIZEPIC));
+ui->pic_air->setPixmap(QPixmap(":/image/ufo").scaled(SIZEPIC, SIZEPIC));
+ui->VS->setPixmap(QPixmap(":/image/VS").scaled(60, 60));
+ui->pic_car_0->setVisible(false);
+ui->pic_car_1->setVisible(false);
+ui->pic_target->setVisible(false);
+ui->pic_air->setVisible(false);
+ui->pic_prop->setVisible(false);
 
-    // set up the camera
-    if (!camera.isValid()) {
-        ui->pic->setText("Invalid camera.");
-        ui->Status->setText("Failed to load the camera.");
-    }
-    else {
-        capture_timer = new QTimer(this);
-        connect(capture_timer, SIGNAL(timeout()), this, SLOT(capture_update()));
-        capture_timer->start(20);
+// init logic
+init_gameData();
 
-        locator.addTargetColor(Locator::Red);
-        locator.addTargetColor(Locator::Green);
-    }
+// set up the camera
+if (!camera.isValid()) {
+	ui->pic->setText("Invalid camera.");
+	ui->Status->setText("Failed to load the camera.");
+}
+else {
+	capture_timer = new QTimer(this);
+	connect(capture_timer, SIGNAL(timeout()), this, SLOT(capture_update()));
+	capture_timer->start(20);
+
+	locator.addTargetColor(Locator::Red);
+	locator.addTargetColor(Locator::Green);
+}
 
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
-    
-    if (NULL != timer_ui) delete timer_ui; 
-    timer_ui = NULL;
-    
-    if (NULL != timer_capture) delete timer_capture;
-    timer_capture = NULL;
+	delete ui;
 
-    if (NULL != timer_logic) delete timer_logic;
-    timer_logic = NULL;
+	if (NULL != timer_ui) delete timer_ui;
+	timer_ui = NULL;
 
-    if (NULL != timer_communication) delete timer_communication;
-    timer_communication = NULL;
+	if (NULL != timer_capture) delete timer_capture;
+	timer_capture = NULL;
+
+	if (NULL != timer_logic) delete timer_logic;
+	timer_logic = NULL;
+
+	if (NULL != timer_communication) delete timer_communication;
+	timer_communication = NULL;
 }
 
 void MainWindow::change_0()
 {
-    gameData.carData[0].health += ui->lineEdit_hpchange_0->text().toInt();
-    ui->lineEdit_hpchange_0->clear();
+	gameData.carData[0].health += ui->lineEdit_hpchange_0->text().toInt();
+	ui->lineEdit_hpchange_0->clear();
 }
-void MainWindow::change_1() 
+void MainWindow::change_1()
 {
-    gameData.carData[1].health += ui->lineEdit_hpchange_1->text().toInt();
-    ui->lineEdit_hpchange_1->clear();
+	gameData.carData[1].health += ui->lineEdit_hpchange_1->text().toInt();
+	ui->lineEdit_hpchange_1->clear();
 }
 
 void MainWindow::game_reset()
 {
-    // ui 
-    ui->pic_target->setVisible(false);
-    ui->pic_air->setVisible(false);
-    ui->pic_prop->setVisible(false);
-    ui->pushButton_start->setText(tr("start"));
+	// ui 
+	ui->pic_target->setVisible(false);
+	ui->pic_air->setVisible(false);
+	ui->pic_prop->setVisible(false);
+	ui->pushButton_start->setText(tr("start"));
 
-    // logic
-    game = Game(MAP_FILENAME);
-    init_gameData();
+	// logic
+	game = Game(MAP_FILENAME);
+	init_gameData();
 
-    // game control
-    status = GameWaiting;
+	// game control
+	status = GameWaiting;
 
-    // timer logic
-    timer_logic->stop();
+	// timer logic
+	timer_logic->stop();
 }
 
 void MainWindow::ui_update()
 {
-    //ui->pic->setText(QString::number(gameData.targetHealth));
-    ui->label_aircommond_0->setText(QString::number((int)gameData.carData[0].air_command));
-    ui->label_color_0->setText(QString::number((int)(gameData.carData[0].color)));
-    ui->label_x_0->setText(QString::number(gameData.carData[0].pos.x));
-    ui->label_y_0->setText(QString::number(gameData.carData[0].pos.y));
-    ui->label_hp_0->setText(QString::number(gameData.carData[0].health));
-    ui->label_TeamName_0->setText("Team Red");
+	int x_s = 62, y_hp = 50, hp_r, hp_g;
+	float l_a = 912, l_r, l_g;
 
-    ui->label_hp_1->setText(QString::number(gameData.carData[0].health));
-    ui->label_aircommond_1->setText(QString::number((int)gameData.carData[1].air_command));
-    ui->label_color_1->setText(QString::number((int)(gameData.carData[1].color)));
-    ui->label_x_1->setText(QString::number(gameData.carData[1].pos.x));
-    ui->label_y_1->setText(QString::number(gameData.carData[1].pos.y));
-    ui->label_hp_1->setText(QString::number(gameData.carData[1].health));
-    ui->label_TeamName_1->setText("Team Green");
-    
-    ui->label_prop_type->setText(QString::number(int(gameData.propType)));
-    ui->label_prop_x->setText(QString::number(gameData.propPoint.x));
-    ui->label_prop_y->setText(QString::number(gameData.propPoint.y));
+	//ºÚ°×Çø
+	ui->Redcolor->setPixmap(QPixmap(gameData.carData[0].color ? ":/image/black" :
+		":/image/white").scaled(170, 600));
+	ui->Greencolor->setPixmap(QPixmap(gameData.carData[1].color ? ":/image/black" :
+		":/image/white").scaled(170, 600));
+	//ui->pic->setText(QString::number(gameData.targetHealth));
+	//·É»ú¿ØÖÆ
+	ui->Air_con_R->setPixmap(QPixmap((gameData.carData[0].air_command) ? ":/image/air_con" : 
+		":/image/air_con_b").scaled(SIZESYM, SIZESYM));
+	ui->Air_con_G->setPixmap(QPixmap((gameData.carData[1].air_command) ? ":/image/air_con" :
+		":/image/air_con_b").scaled(SIZESYM, SIZESYM));
 
-    ui->label_tower_x->setText(QString::number(gameData.targetPoint.x));
-    ui->label_tower_y->setText(QString::number(gameData.targetPoint.y));
-    ui->label_tower_color->setText(QString::number((int)(gameData.planeStatus)));
-    ui->label_air_status->setText(QString::number(int(gameData.planeStatus)));
-    ui->label_air_x->setText(QString::number(gameData.planePoint.x));
-    ui->label_air_y->setText(QString::number(gameData.planePoint.y));
+	//·É»ú¹¥»÷¡¢¼ÓÑª
+	if (gameData.carData[0].attack_plane)
+		ui->Air_A_R->setPixmap(QPixmap(":/image/air_att").scaled(SIZESYM, SIZESYM));
+	else
+		ui->Air_A_R->setPixmap(QPixmap(gameData.carData[0].heal_plane ? ":/image/air_heal" :
+			":/image/air_no").scaled(SIZESYM, SIZESYM));
+	if (gameData.carData[1].attack_plane)
+		ui->Air_A_G->setPixmap(QPixmap(":/image/air_att").scaled(SIZESYM, SIZESYM));
+	else
+		ui->Air_A_G->setPixmap(QPixmap(gameData.carData[1].heal_plane ? ":/image/air_heal" :
+			":/image/air_no").scaled(SIZESYM, SIZESYM));
+	
+	//³ö½ç
+	ui->O_range_R->setPixmap(QPixmap(gameData.carData[1].out_of_range ? ":/image/OR" :
+		":/image/OR_b").scaled(SIZESYM, SIZESYM));
+	ui->O_range_G->setPixmap(QPixmap(gameData.carData[1].out_of_range ? ":/image/OR" :
+			":/image/OR_b").scaled(SIZESYM, SIZESYM));
+
+	//µØÍ¼¹¥»÷
+	if (gameData.carData[0].long_attack_map)
+		ui->Att_R->setPixmap(QPixmap(":/image/hurt").scaled(SIZESYM, SIZESYM));
+	else
+		ui->Att_R->setPixmap(QPixmap(gameData.carData[0].short_attack_map ? ":/image/hurt_m" :
+			":/image/hurt_n").scaled(SIZESYM, SIZESYM));
+	if (gameData.carData[1].long_attack_map)
+		ui->Att_G->setPixmap(QPixmap(":/image/hurt").scaled(SIZESYM, SIZESYM));
+	else
+		ui->Att_G->setPixmap(QPixmap(gameData.carData[1].short_attack_map ? ":/image/hurt_m" :
+			":/image/hurt_n").scaled(SIZESYM, SIZESYM));
+
+	//ÑªÌõ
+	hp_r = gameData.carData[0].health;
+	hp_g = gameData.carData[1].health;
+	l_r = l_a * hp_r / (hp_r + hp_g);
+	l_g = l_a * hp_g / (hp_r + hp_g);
+	ui->HP_R->resize(l_r, 25);
+	ui->HP_G->resize(l_g, 25);
+	ui->HP_G->move(x_s + l_r, y_hp);
 
     int x0 = 199 - SIZEPIC / 2;
     int y0 = 114 - SIZEPIC / 2;
@@ -177,6 +206,7 @@ void MainWindow::ui_update()
     ui->pic_prop->setPixmap(QPixmap(QString(":/image/prop_%1").arg(int(gameData.propType))).scaled(SIZEPIC, SIZEPIC));
     t = mapper.MapToImage(gameData.propPoint.x, gameData.propPoint.y);
     ui->pic_prop->move(x0 + t.x, y0 + t.y);
+	
 }
 
 void MainWindow::game_status_change()

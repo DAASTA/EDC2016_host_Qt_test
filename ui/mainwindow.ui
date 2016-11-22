@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1035</width>
+    <width>1037</width>
     <height>751</height>
    </rect>
   </property>
@@ -124,50 +124,11 @@
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>50</y>
-      <width>361</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>50</y>
-      <width>361</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_8">
-    <property name="geometry">
-     <rect>
-      <x>430</x>
-      <y>20</y>
-      <width>141</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>VS</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_change_1">
     <property name="geometry">
      <rect>
-      <x>841</x>
-      <y>561</y>
+      <x>850</x>
+      <y>640</y>
       <width>84</width>
       <height>30</height>
      </rect>
@@ -179,8 +140,8 @@
    <widget class="QPushButton" name="pushButton_change_0">
     <property name="geometry">
      <rect>
-      <x>31</x>
-      <y>561</y>
+      <x>40</x>
+      <y>640</y>
       <width>84</width>
       <height>30</height>
      </rect>
@@ -192,333 +153,21 @@
    <widget class="QLineEdit" name="lineEdit_hpchange_0">
     <property name="geometry">
      <rect>
-      <x>31</x>
-      <y>527</y>
+      <x>20</x>
+      <y>610</y>
       <width>158</width>
       <height>28</height>
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>841</x>
-      <y>319</y>
-      <width>16</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>x</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_12">
-    <property name="geometry">
-     <rect>
-      <x>841</x>
-      <y>388</y>
-      <width>16</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Y</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_x_0">
-    <property name="geometry">
-     <rect>
-      <x>31</x>
-      <y>354</y>
-      <width>90</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_9">
-    <property name="geometry">
-     <rect>
-      <x>31</x>
-      <y>388</y>
-      <width>16</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Y</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="lineEdit_hpchange_1">
     <property name="geometry">
      <rect>
-      <x>841</x>
-      <y>527</y>
+      <x>850</x>
+      <y>606</y>
       <width>159</width>
       <height>28</height>
      </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_10">
-    <property name="geometry">
-     <rect>
-      <x>31</x>
-      <y>111</y>
-      <width>38</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>队伍</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_aircommond_1">
-    <property name="geometry">
-     <rect>
-      <x>841</x>
-      <y>492</y>
-      <width>90</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_11">
-    <property name="geometry">
-     <rect>
-      <x>841</x>
-      <y>111</y>
-      <width>38</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>队伍</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_aircommond_0">
-    <property name="geometry">
-     <rect>
-      <x>31</x>
-      <y>492</y>
-      <width>90</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_TeamName_0">
-    <property name="geometry">
-     <rect>
-      <x>31</x>
-      <y>146</y>
-      <width>90</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_TeamName_1">
-    <property name="geometry">
-     <rect>
-      <x>841</x>
-      <y>146</y>
-      <width>90</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_hp_0">
-    <property name="geometry">
-     <rect>
-      <x>31</x>
-      <y>215</y>
-      <width>90</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_1">
-    <property name="geometry">
-     <rect>
-      <x>31</x>
-      <y>180</y>
-      <width>20</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>hp</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>841</x>
-      <y>180</y>
-      <width>20</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>hp</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>841</x>
-      <y>250</y>
-      <width>50</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>color</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_hp_1">
-    <property name="geometry">
-     <rect>
-      <x>841</x>
-      <y>215</y>
-      <width>90</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_color_0">
-    <property name="geometry">
-     <rect>
-      <x>31</x>
-      <y>284</y>
-      <width>90</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_color_1">
-    <property name="geometry">
-     <rect>
-      <x>841</x>
-      <y>284</y>
-      <width>90</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>31</x>
-      <y>250</y>
-      <width>50</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>color</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_6">
-    <property name="geometry">
-     <rect>
-      <x>31</x>
-      <y>319</y>
-      <width>16</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>x</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_17">
-    <property name="geometry">
-     <rect>
-      <x>31</x>
-      <y>458</y>
-      <width>57</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>制空权</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_y_0">
-    <property name="geometry">
-     <rect>
-      <x>31</x>
-      <y>423</y>
-      <width>90</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_x_1">
-    <property name="geometry">
-     <rect>
-      <x>841</x>
-      <y>354</y>
-      <width>90</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_y_1">
-    <property name="geometry">
-     <rect>
-      <x>841</x>
-      <y>423</y>
-      <width>90</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_18">
-    <property name="geometry">
-     <rect>
-      <x>841</x>
-      <y>458</y>
-      <width>57</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>制空权</string>
     </property>
    </widget>
    <widget class="QLabel" name="pic">
@@ -564,13 +213,455 @@
      <string>pic</string>
     </property>
    </widget>
+   <widget class="QLabel" name="Greencolor">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>80</y>
+      <width>170</width>
+      <height>600</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>170</width>
+      <height>600</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>170</width>
+      <height>600</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: transparent;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>90</y>
+      <width>92</width>
+      <height>500</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="Air_A_G">
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>90</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>90</width>
+         <height>90</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>无人机</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="Air_con_G">
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>90</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>90</width>
+         <height>90</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>飞机控制</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="O_range_G">
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>90</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>90</width>
+         <height>90</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>出界</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_6">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="prop_G">
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>90</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>90</width>
+         <height>90</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>道具</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_8">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="Att_G">
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>90</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>90</width>
+         <height>90</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>伤害</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="HP_R">
+    <property name="geometry">
+     <rect>
+      <x>62</x>
+      <y>50</y>
+      <width>456</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255,0 , 0)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="HP_G">
+    <property name="geometry">
+     <rect>
+      <x>518</x>
+      <y>50</y>
+      <width>456</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>25</height>
+     </size>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 255, 0)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Redcolor">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>80</y>
+      <width>170</width>
+      <height>600</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>170</width>
+      <height>600</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>170</width>
+      <height>600</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: transparent</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="prop_R">
+    <property name="geometry">
+     <rect>
+      <x>61</x>
+      <y>407</y>
+      <width>90</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>90</width>
+      <height>90</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>90</width>
+      <height>90</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>道具</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Air_A_R">
+    <property name="geometry">
+     <rect>
+      <x>61</x>
+      <y>101</y>
+      <width>90</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>90</width>
+      <height>90</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>90</width>
+      <height>90</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>无人机</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="O_range_R">
+    <property name="geometry">
+     <rect>
+      <x>61</x>
+      <y>305</y>
+      <width>90</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>90</width>
+      <height>90</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>90</width>
+      <height>90</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>出界</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Att_R">
+    <property name="geometry">
+     <rect>
+      <x>61</x>
+      <y>509</y>
+      <width>90</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>90</width>
+      <height>90</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>90</width>
+      <height>90</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>伤害</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Air_con_R">
+    <property name="geometry">
+     <rect>
+      <x>61</x>
+      <y>203</y>
+      <width>90</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>90</width>
+      <height>90</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>90</width>
+      <height>90</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>飞机控制</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="VS">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>0</y>
+      <width>60</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>60</width>
+      <height>60</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <zorder>pic</zorder>
+   <zorder>Redcolor</zorder>
+   <zorder>HP_R</zorder>
+   <zorder>HP_G</zorder>
+   <zorder>Greencolor</zorder>
+   <zorder>pushButton_start</zorder>
+   <zorder>pushButton_reset</zorder>
+   <zorder>pic_car_0</zorder>
+   <zorder>pic_car_1</zorder>
+   <zorder>pic_air</zorder>
+   <zorder>pic_target</zorder>
+   <zorder>pic_prop</zorder>
+   <zorder>Status</zorder>
+   <zorder>pushButton_change_1</zorder>
+   <zorder>lineEdit_hpchange_1</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>VS</zorder>
+   <zorder>lineEdit_hpchange_0</zorder>
+   <zorder>Air_A_R</zorder>
+   <zorder>pushButton_change_0</zorder>
+   <zorder>prop_R</zorder>
+   <zorder>Air_con_R</zorder>
+   <zorder>Att_R</zorder>
+   <zorder>O_range_R</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1035</width>
+     <width>1037</width>
      <height>23</height>
     </rect>
    </property>
