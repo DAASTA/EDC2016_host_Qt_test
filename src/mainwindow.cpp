@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ,ui(new Ui::MainWindow)
     ,game(MAP_FILENAME)
     ,mapper("./data/index_points.txt")
-    ,camera(1, "./data/hd_usb_camera.xml")
+    ,camera(0, "./data/hd_usb_camera.xml")
     //, camera(0)
     ,capture_timer(NULL)
 {
@@ -283,7 +283,7 @@ void MainWindow::communicate_update()
     if (ll.size() > 0)
     {
         MyString& ms = ll[ll.size() - 1];
-        if (ms.length() == 3) {
+        if (ms.length() == 5) {
             if (gameData.carData[ms[0]].air_command) {
                 dobby.SetTarget(Point(ms[1], ms[2]));
             }

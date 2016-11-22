@@ -46,387 +46,6 @@
      <string>reset</string>
     </property>
    </widget>
-   <widget class="QWidget" name="layoutWidget1">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>20</y>
-      <width>651</width>
-      <height>80</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_27">
-       <property name="text">
-        <string>目标点颜色</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="label_tower_color">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QLabel" name="label_28">
-       <property name="text">
-        <string>x</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="3">
-      <widget class="QLabel" name="label_tower_x">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="4">
-      <widget class="QLabel" name="label_31">
-       <property name="text">
-        <string>y</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="5">
-      <widget class="QLabel" name="label_tower_y">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_34">
-       <property name="text">
-        <string>道具类型</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="label_prop_type">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QLabel" name="label_33">
-       <property name="text">
-        <string>x</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="3">
-      <widget class="QLabel" name="label_prop_x">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="4">
-      <widget class="QLabel" name="label_32">
-       <property name="text">
-        <string>y</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="5">
-      <widget class="QLabel" name="label_prop_y">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_42">
-       <property name="text">
-        <string>飞机状态</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLabel" name="label_air_status">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="2">
-      <widget class="QLabel" name="label_40">
-       <property name="text">
-        <string>x</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="3">
-      <widget class="QLabel" name="label_air_x">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="4">
-      <widget class="QLabel" name="label_43">
-       <property name="text">
-        <string>y</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="5">
-      <widget class="QLabel" name="label_air_y">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>110</y>
-      <width>971</width>
-      <height>482</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout_1">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetMinAndMaxSize</enum>
-     </property>
-     <property name="leftMargin">
-      <number>0</number>
-     </property>
-     <item row="12" column="0">
-      <widget class="QLineEdit" name="lineEdit_hpchange_0"/>
-     </item>
-     <item row="13" column="0">
-      <widget class="QPushButton" name="pushButton_change_0">
-       <property name="text">
-        <string>修改血量</string>
-       </property>
-      </widget>
-     </item>
-     <item row="13" column="2">
-      <widget class="QPushButton" name="pushButton_change_1">
-       <property name="text">
-        <string>修改血量</string>
-       </property>
-      </widget>
-     </item>
-     <item row="12" column="2">
-      <widget class="QLineEdit" name="lineEdit_hpchange_1"/>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_10">
-       <property name="text">
-        <string>队伍</string>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="2">
-      <widget class="QLabel" name="label_aircommond_1">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QLabel" name="label_11">
-       <property name="text">
-        <string>队伍</string>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="0">
-      <widget class="QLabel" name="label_aircommond_0">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_TeamName_0">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QLabel" name="label_TeamName_1">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_hp_0">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_1">
-       <property name="text">
-        <string>hp</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="2">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>hp</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="2">
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>color</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="2">
-      <widget class="QLabel" name="label_hp_1">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="label_color_0">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="2">
-      <widget class="QLabel" name="label_color_1">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>color</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="label_6">
-       <property name="text">
-        <string>x</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="2">
-      <widget class="QLabel" name="label_7">
-       <property name="text">
-        <string>x</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="2">
-      <widget class="QLabel" name="label_12">
-       <property name="text">
-        <string>Y</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="0">
-      <widget class="QLabel" name="label_x_0">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="0">
-      <widget class="QLabel" name="label_9">
-       <property name="text">
-        <string>Y</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="0">
-      <widget class="QLabel" name="label_17">
-       <property name="text">
-        <string>制空权</string>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="0">
-      <widget class="QLabel" name="label_y_0">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="2">
-      <widget class="QLabel" name="label_x_1">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="2">
-      <widget class="QLabel" name="label_y_1">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="2">
-      <widget class="QLabel" name="label_18">
-       <property name="text">
-        <string>制空权</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1" rowspan="14">
-      <widget class="QLabel" name="pic">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>640</width>
-         <height>480</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>640</width>
-         <height>480</height>
-        </size>
-       </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::Panel</enum>
-       </property>
-       <property name="lineWidth">
-        <number>2</number>
-       </property>
-       <property name="text">
-        <string>pic</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QLabel" name="pic_car_0">
     <property name="geometry">
      <rect>
@@ -505,6 +124,446 @@
      <string>TextLabel</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>50</y>
+      <width>361</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>50</y>
+      <width>361</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>20</y>
+      <width>141</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>VS</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_change_1">
+    <property name="geometry">
+     <rect>
+      <x>841</x>
+      <y>561</y>
+      <width>84</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>修改血量</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_change_0">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>561</y>
+      <width>84</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>修改血量</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_hpchange_0">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>527</y>
+      <width>158</width>
+      <height>28</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>841</x>
+      <y>319</y>
+      <width>16</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>x</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>841</x>
+      <y>388</y>
+      <width>16</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Y</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_x_0">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>354</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>388</y>
+      <width>16</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Y</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_hpchange_1">
+    <property name="geometry">
+     <rect>
+      <x>841</x>
+      <y>527</y>
+      <width>159</width>
+      <height>28</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>111</y>
+      <width>38</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>队伍</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_aircommond_1">
+    <property name="geometry">
+     <rect>
+      <x>841</x>
+      <y>492</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>841</x>
+      <y>111</y>
+      <width>38</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>队伍</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_aircommond_0">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>492</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_TeamName_0">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>146</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_TeamName_1">
+    <property name="geometry">
+     <rect>
+      <x>841</x>
+      <y>146</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_hp_0">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>215</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_1">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>180</y>
+      <width>20</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>hp</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>841</x>
+      <y>180</y>
+      <width>20</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>hp</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>841</x>
+      <y>250</y>
+      <width>50</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>color</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_hp_1">
+    <property name="geometry">
+     <rect>
+      <x>841</x>
+      <y>215</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_color_0">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>284</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_color_1">
+    <property name="geometry">
+     <rect>
+      <x>841</x>
+      <y>284</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>250</y>
+      <width>50</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>color</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>319</y>
+      <width>16</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>x</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_17">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>458</y>
+      <width>57</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>制空权</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_y_0">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>423</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_x_1">
+    <property name="geometry">
+     <rect>
+      <x>841</x>
+      <y>354</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_y_1">
+    <property name="geometry">
+     <rect>
+      <x>841</x>
+      <y>423</y>
+      <width>90</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_18">
+    <property name="geometry">
+     <rect>
+      <x>841</x>
+      <y>458</y>
+      <width>57</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>制空权</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="pic">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>195</x>
+      <y>111</y>
+      <width>640</width>
+      <height>480</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>640</width>
+      <height>480</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>640</width>
+      <height>480</height>
+     </size>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Panel</enum>
+    </property>
+    <property name="lineWidth">
+     <number>2</number>
+    </property>
+    <property name="text">
+     <string>pic</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -512,7 +571,7 @@
      <x>0</x>
      <y>0</y>
      <width>1035</width>
-     <height>28</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
