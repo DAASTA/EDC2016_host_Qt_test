@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ,ui(new Ui::MainWindow)
     ,game(MAP_FILENAME)
     ,mapper("./data/index_points.txt")
-    ,camera(0, "./data/hd_usb_camera.xml")
+    ,camera(1, "./data/hd_usb_camera.xml")
     //, camera(0)
     ,capture_timer(NULL)
 {
@@ -163,23 +163,34 @@ void MainWindow::ui_update()
 	if (gameData.carData[0].long_attack_map)
 		ui->Att_R->setPixmap(QPixmap(":/image/hurt").scaled(SIZESYM, SIZESYM));
 	else
-		ui->Att_R->setPixmap(QPixmap(gameData.carData[0].short_attack_map ? ":/image/hurt_m" :
+		ui->Att_R->setPixmap(QPixmap((gameData.carData[0].short_attack_map|| gameData.carData[0].out_of_range) ? ":/image/hurt_m" :
 			":/image/hurt_n").scaled(SIZESYM, SIZESYM));
 	if (gameData.carData[1].long_attack_map)
 		ui->Att_G->setPixmap(QPixmap(":/image/hurt").scaled(SIZESYM, SIZESYM));
 	else
-		ui->Att_G->setPixmap(QPixmap(gameData.carData[1].short_attack_map ? ":/image/hurt_m" :
+		ui->Att_G->setPixmap(QPixmap((gameData.carData[1].short_attack_map||gameData.carData[1].out_of_range) ? ":/image/hurt_m" :
 			":/image/hurt_n").scaled(SIZESYM, SIZESYM));
 
 	//血条
 	hp_r = gameData.carData[0].health;
+	hp_r = hp_r > 0 ? hp_r : 0;
 	hp_g = gameData.carData[1].health;
+	hp_g = hp_g > 0 ? hp_g : 0;
 	l_r = l_a * hp_r / (hp_r + hp_g);
 	l_g = l_a * hp_g / (hp_r + hp_g);
 	ui->HP_R->resize(l_r, 25);
+	ui->HP_R->setText(QString::number(hp_r));
 	ui->HP_G->resize(l_g, 25);
 	ui->HP_G->move(x_s + l_r, y_hp);
+	ui->HP_G->setText(QString::number(hp_g));
 
+	//时间
+	ui->time->setText(QString::number(gameData.round));
+
+	//飞机当前状态
+	ui->air_status->setText(QString::fromStdString(gameData.planeStatus?"Attack":"Heal"));
+
+	//小车+飞机
     int x0 = 199 - SIZEPIC / 2;
     int y0 = 114 - SIZEPIC / 2;
     cv::Point t;

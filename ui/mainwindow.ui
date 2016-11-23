@@ -124,52 +124,6 @@
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_change_1">
-    <property name="geometry">
-     <rect>
-      <x>850</x>
-      <y>640</y>
-      <width>84</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>修改血量</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_change_0">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>640</y>
-      <width>84</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>修改血量</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_hpchange_0">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>610</y>
-      <width>158</width>
-      <height>28</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_hpchange_1">
-    <property name="geometry">
-     <rect>
-      <x>850</x>
-      <y>606</y>
-      <width>159</width>
-      <height>28</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLabel" name="pic">
     <property name="enabled">
      <bool>true</bool>
@@ -348,38 +302,6 @@
       </spacer>
      </item>
      <item>
-      <widget class="QLabel" name="prop_G">
-       <property name="minimumSize">
-        <size>
-         <width>90</width>
-         <height>90</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>90</width>
-         <height>90</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>道具</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="verticalSpacer_8">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
       <widget class="QLabel" name="Att_G">
        <property name="minimumSize">
         <size>
@@ -399,6 +321,10 @@
       </widget>
      </item>
     </layout>
+    <zorder>Att_G</zorder>
+    <zorder>Air_A_G</zorder>
+    <zorder>O_range_G</zorder>
+    <zorder>Air_con_G</zorder>
    </widget>
    <widget class="QLabel" name="HP_R">
     <property name="geometry">
@@ -458,6 +384,9 @@
     <property name="text">
      <string/>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
    </widget>
    <widget class="QLabel" name="Redcolor">
     <property name="geometry">
@@ -487,36 +416,46 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="prop_R">
+   <widget class="QLabel" name="VS">
     <property name="geometry">
      <rect>
-      <x>61</x>
-      <y>407</y>
-      <width>90</width>
-      <height>90</height>
+      <x>490</x>
+      <y>0</y>
+      <width>60</width>
+      <height>60</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>90</width>
-      <height>90</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>90</width>
-      <height>90</height>
+      <width>60</width>
+      <height>60</height>
      </size>
     </property>
     <property name="text">
-     <string>道具</string>
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="time">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>80</y>
+      <width>81</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="Air_A_R">
     <property name="geometry">
      <rect>
       <x>61</x>
-      <y>101</y>
+      <y>92</y>
       <width>90</width>
       <height>90</height>
      </rect>
@@ -537,36 +476,24 @@
      <string>无人机</string>
     </property>
    </widget>
-   <widget class="QLabel" name="O_range_R">
+   <widget class="QPushButton" name="pushButton_change_1">
     <property name="geometry">
      <rect>
-      <x>61</x>
-      <y>305</y>
-      <width>90</width>
-      <height>90</height>
+      <x>861</x>
+      <y>635</y>
+      <width>141</width>
+      <height>30</height>
      </rect>
     </property>
-    <property name="minimumSize">
-     <size>
-      <width>90</width>
-      <height>90</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>90</width>
-      <height>90</height>
-     </size>
-    </property>
     <property name="text">
-     <string>出界</string>
+     <string>修改血量</string>
     </property>
    </widget>
    <widget class="QLabel" name="Att_R">
     <property name="geometry">
      <rect>
       <x>61</x>
-      <y>509</y>
+      <y>491</y>
       <width>90</width>
       <height>90</height>
      </rect>
@@ -587,11 +514,69 @@
      <string>伤害</string>
     </property>
    </widget>
+   <widget class="QLabel" name="O_range_R">
+    <property name="geometry">
+     <rect>
+      <x>61</x>
+      <y>358</y>
+      <width>90</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>90</width>
+      <height>90</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>90</width>
+      <height>90</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>出界</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_hpchange_0">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>591</y>
+      <width>139</width>
+      <height>28</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_hpchange_1">
+    <property name="geometry">
+     <rect>
+      <x>861</x>
+      <y>601</y>
+      <width>141</width>
+      <height>28</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_change_0">
+    <property name="geometry">
+     <rect>
+      <x>31</x>
+      <y>625</y>
+      <width>141</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>修改血量</string>
+    </property>
+   </widget>
    <widget class="QLabel" name="Air_con_R">
     <property name="geometry">
      <rect>
       <x>61</x>
-      <y>203</y>
+      <y>225</y>
       <width>90</width>
       <height>90</height>
      </rect>
@@ -612,30 +597,38 @@
      <string>飞机控制</string>
     </property>
    </widget>
-   <widget class="QLabel" name="VS">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>0</y>
-      <width>60</width>
-      <height>60</height>
+      <x>350</x>
+      <y>640</y>
+      <width>141</width>
+      <height>21</height>
      </rect>
     </property>
-    <property name="minimumSize">
-     <size>
-      <width>60</width>
-      <height>60</height>
-     </size>
-    </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string>无人机当前状态</string>
     </property>
    </widget>
-   <zorder>pic</zorder>
+   <widget class="QLabel" name="air_status">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>640</y>
+      <width>141</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>无人机当前状态</string>
+    </property>
+   </widget>
    <zorder>Redcolor</zorder>
+   <zorder>Greencolor</zorder>
+   <zorder>pic</zorder>
+   <zorder>time</zorder>
    <zorder>HP_R</zorder>
    <zorder>HP_G</zorder>
-   <zorder>Greencolor</zorder>
    <zorder>pushButton_start</zorder>
    <zorder>pushButton_reset</zorder>
    <zorder>pic_car_0</zorder>
@@ -644,17 +637,18 @@
    <zorder>pic_target</zorder>
    <zorder>pic_prop</zorder>
    <zorder>Status</zorder>
-   <zorder>pushButton_change_1</zorder>
-   <zorder>lineEdit_hpchange_1</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>VS</zorder>
-   <zorder>lineEdit_hpchange_0</zorder>
    <zorder>Air_A_R</zorder>
-   <zorder>pushButton_change_0</zorder>
-   <zorder>prop_R</zorder>
-   <zorder>Air_con_R</zorder>
+   <zorder>pushButton_change_1</zorder>
    <zorder>Att_R</zorder>
    <zorder>O_range_R</zorder>
+   <zorder>lineEdit_hpchange_0</zorder>
+   <zorder>lineEdit_hpchange_1</zorder>
+   <zorder>pushButton_change_0</zorder>
+   <zorder>Air_con_R</zorder>
+   <zorder>label</zorder>
+   <zorder>air_status</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
