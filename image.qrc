@@ -2,44 +2,28 @@
     <qresource prefix="/image">
         <file alias="car_0">image/car_0.png</file>
         <file alias="car_1">image/car_1.png</file>
-        <file alias="star">image/star.png</file>
         <file alias="prop_1">image/prop_1.png</file>
         <file alias="prop_2">image/prop_2.png</file>
         <file alias="prop_3">image/prop_3.png</file>
         <file alias="prop_0">image/prop_0.png</file>
-        <file alias="add">image/add.png</file>
-        <file alias="add_b">image/add_b.png</file>
-        <file alias="air_con">image/air_con.png</file>
-        <file alias="air_con_b">image/air_con_b.png</file>
-        <file alias="black">image/black.png</file>
-        <file alias="change">image/change.png</file>
-        <file alias="change_b">image/change0.png</file>
-        <file alias="OR">image/outofrange.png</file>
-        <file alias="OR_b">image/outofrange_b.png</file>
-        <file alias="VS">image/VS1.png</file>
-        <file>image/VS2.png</file>
-        <file>image/VS3.png</file>
-        <file>image/VS4.png</file>
-        <file alias="white">image/white.png</file>
-        <file>image/黑色位置.png</file>
-        <file>image/黑色位置2.png</file>
-        <file alias="add2_b">image/加血2（灰）.png</file>
-        <file alias="add2">image/加血2.png</file>
-        <file>image/目标点.png</file>
-        <file>image/目标点2.png</file>
-        <file>image/无人机1（灰）.png</file>
-        <file alias="ufo">image/无人机1.png</file>
-        <file>image/无人机2（灰）.png</file>
-        <file alias="air_att">image/无人机2.png</file>
-        <file alias="air_no">image/无人机3（灰）.png</file>
-        <file alias="air_heal">image/无人机3.png</file>
-        <file>image/无人机4（灰）.png</file>
-        <file>image/无人机4.png</file>
-        <file alias="hurt">image/hurt_l.png</file>
-        <file alias="hurt_m">image/hurt_m.png</file>
-        <file alias="hurt_n">image/hurt_n.png</file>
-        <file>image/air_att.png</file>
-        <file>image/ufo.png</file>
-        <file>image/add - 副本.png</file>
+        <file alias="clock">image/clock.png</file>
+        <file alias="clock_disabled">image/clock_disabled.png</file>
+        <file>image/compass.png</file>
+        <file alias="control">image/control.png</file>
+        <file>image/gift.png</file>
+        <file alias="heart">image/heart.png</file>
+        <file alias="lightning">image/lightning.png</file>
+        <file alias="location_green">image/location_green.png</file>
+        <file alias="location_not_found">image/location_not_found.png</file>
+        <file alias="location_red">image/location_red.png</file>
+        <file>image/map.png</file>
+        <file alias="map_black">image/map_black.png</file>
+        <file alias="map_white">image/map_white.png</file>
+        <file alias="plane">image/plane.png</file>
+        <file alias="star_s">image/star_s.png</file>
+        <file alias="swap">image/swap.png</file>
+        <file alias="verified">image/verfied.png</file>
+        <file alias="warning_0">image/warning_0.png</file>
+        <file alias="warning_1">image/warning_1.png</file>
     </qresource>
 </RCC>

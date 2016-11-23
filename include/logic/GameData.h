@@ -10,10 +10,9 @@ const static char* const format_car_in = "%lf%d%d%d%d%d%d%d%d%d";
 const static char* const format_game = "%3d  %3d %3d %4.1lf   %3d %3d %1d    %3d %3d %1d  \r\n";
 const static char* const format_game_in = "%d%d%d%lf%d%d%d%d%d%d";
 
-struct CarData
+class CarData
 {
-    
-
+public:
     //小车信息
     double health;//血量
     Point pos;//位置
@@ -25,11 +24,12 @@ struct CarData
     bool air_command;//是否有制空权
     int count_air_command;//记录制空权回合数
 
-    bool out_of_range; //是否出界
+    bool out_of_range() {//是否出界
+        return (pos.x <= 0 || pos.x >= 255 || pos.y <= 0 || pos.y >= 255);
+    } 
 
     std::string getString() {
         char buffer[512];
-        
 
         sprintf(buffer, format_car,
             health, pos.x, pos.y, color, 
@@ -51,8 +51,9 @@ struct CarData
 };
 
 
-struct GameData
+class GameData
 {
+public:
     //回合数
     int round;
     //小车信息

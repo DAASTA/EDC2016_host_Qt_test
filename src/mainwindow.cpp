@@ -28,52 +28,51 @@ MainWindow::MainWindow(QWidget *parent) :
     status = GameWaiting;
 
     // timer_ui
-timer_ui = new QTimer(this);
-connect(timer_ui, SIGNAL(timeout()), this, SLOT(ui_update()));
-timer_ui->start(33);
+    timer_ui = new QTimer(this);
+    connect(timer_ui, SIGNAL(timeout()), this, SLOT(ui_update()));
+    timer_ui->start(33);
 
-// timer_logic
-timer_logic = new QTimer(this);
-connect(timer_logic, SIGNAL(timeout()), this, SLOT(logic_update()));
-//timer_logic->start(100); 
+    // timer_logic
+    timer_logic = new QTimer(this);
+    connect(timer_logic, SIGNAL(timeout()), this, SLOT(logic_update()));
+    //timer_logic->start(100); 
 
-// timer_communication
-timer_communication = new QTimer(this);
-connect(timer_communication, SIGNAL(timeout()), this, SLOT(communicate_update()));
-timer_communication->start(100);
+    // timer_communication
+    timer_communication = new QTimer(this);
+    connect(timer_communication, SIGNAL(timeout()), this, SLOT(communicate_update()));
+    timer_communication->start(100);
 
-// ui
-connect(ui->pushButton_change_0, SIGNAL(clicked()), this, SLOT(change_0()));
-connect(ui->pushButton_change_1, SIGNAL(clicked()), this, SLOT(change_1()));
-connect(ui->pushButton_reset, SIGNAL(clicked()), this, SLOT(game_reset()));
-connect(ui->pushButton_start, SIGNAL(clicked()), this, SLOT(game_status_change()));
-ui->pic_car_0->setPixmap(QPixmap(":/image/car_0").scaled(SIZEPIC, SIZEPIC));
-ui->pic_car_1->setPixmap(QPixmap(":/image/car_1").scaled(SIZEPIC, SIZEPIC));
-ui->pic_target->setPixmap(QPixmap(":/image/star").scaled(SIZEPIC, SIZEPIC));
-ui->pic_air->setPixmap(QPixmap(":/image/ufo").scaled(SIZEPIC, SIZEPIC));
-ui->VS->setPixmap(QPixmap(":/image/VS").scaled(60, 60));
-ui->pic_car_0->setVisible(false);
-ui->pic_car_1->setVisible(false);
-ui->pic_target->setVisible(false);
-ui->pic_air->setVisible(false);
-ui->pic_prop->setVisible(false);
+    // ui
+    connect(ui->pushButton_change_0, SIGNAL(clicked()), this, SLOT(change_0()));
+    connect(ui->pushButton_change_1, SIGNAL(clicked()), this, SLOT(change_1()));
+    connect(ui->pushButton_reset, SIGNAL(clicked()), this, SLOT(game_reset()));
+    connect(ui->pushButton_start, SIGNAL(clicked()), this, SLOT(game_status_change()));
+    ui->pic_car_0->setPixmap(QPixmap(":/image/location_red").scaled(SIZEPIC, SIZEPIC));
+    ui->pic_car_1->setPixmap(QPixmap(":/image/location_green").scaled(SIZEPIC, SIZEPIC));
+    ui->pic_target->setPixmap(QPixmap(":/image/star_s").scaled(SIZEPIC, SIZEPIC));
+    ui->pic_air->setPixmap(QPixmap(":/image/plane").scaled(SIZEPIC, SIZEPIC));
+    ui->pic_car_0->setVisible(false);
+    ui->pic_car_1->setVisible(false);
+    ui->pic_target->setVisible(false);
+    ui->pic_air->setVisible(false);
+    ui->pic_prop->setVisible(false);
 
-// init logic
-init_gameData();
+    // init logic
+    init_gameData();
 
-// set up the camera
-if (!camera.isValid()) {
-	ui->pic->setText("Invalid camera.");
-	ui->Status->setText("Failed to load the camera.");
-}
-else {
-	capture_timer = new QTimer(this);
-	connect(capture_timer, SIGNAL(timeout()), this, SLOT(capture_update()));
-	capture_timer->start(20);
+    // set up the camera
+    if (!camera.isValid()) {
+	    ui->pic->setText("Invalid camera.");
+	    ui->Status->setText("Failed to load the camera.");
+    }
+    else {
+	    capture_timer = new QTimer(this);
+	    connect(capture_timer, SIGNAL(timeout()), this, SLOT(capture_update()));
+	    capture_timer->start(20);
 
-	locator.addTargetColor(Locator::Red);
-	locator.addTargetColor(Locator::Green);
-}
+	    locator.addTargetColor(Locator::Red);
+	    locator.addTargetColor(Locator::Green);
+    }
 
 }
 
@@ -111,7 +110,7 @@ void MainWindow::game_reset()
 	ui->pic_target->setVisible(false);
 	ui->pic_air->setVisible(false);
 	ui->pic_prop->setVisible(false);
-	ui->pushButton_start->setText(tr("start"));
+	ui->pushButton_start->setText(tr("START"));
 
 	// logic
 	game = Game(MAP_FILENAME);
@@ -126,73 +125,10 @@ void MainWindow::game_reset()
 
 void MainWindow::ui_update()
 {
-	int x_s = 62, y_hp = 50, hp_r, hp_g;
-	float l_a = 912, l_r, l_g;
-
-	//黑白区
-	ui->Redcolor->setPixmap(QPixmap(gameData.carData[0].color ? ":/image/black" :
-		":/image/white").scaled(170, 600));
-	ui->Greencolor->setPixmap(QPixmap(gameData.carData[1].color ? ":/image/black" :
-		":/image/white").scaled(170, 600));
-	//ui->pic->setText(QString::number(gameData.targetHealth));
-	//飞机控制
-	ui->Air_con_R->setPixmap(QPixmap((gameData.carData[0].air_command) ? ":/image/air_con" : 
-		":/image/air_con_b").scaled(SIZESYM, SIZESYM));
-	ui->Air_con_G->setPixmap(QPixmap((gameData.carData[1].air_command) ? ":/image/air_con" :
-		":/image/air_con_b").scaled(SIZESYM, SIZESYM));
-
-	//飞机攻击、加血
-	if (gameData.carData[0].attack_plane)
-		ui->Air_A_R->setPixmap(QPixmap(":/image/air_att").scaled(SIZESYM, SIZESYM));
-	else
-		ui->Air_A_R->setPixmap(QPixmap(gameData.carData[0].heal_plane ? ":/image/air_heal" :
-			":/image/air_no").scaled(SIZESYM, SIZESYM));
-	if (gameData.carData[1].attack_plane)
-		ui->Air_A_G->setPixmap(QPixmap(":/image/air_att").scaled(SIZESYM, SIZESYM));
-	else
-		ui->Air_A_G->setPixmap(QPixmap(gameData.carData[1].heal_plane ? ":/image/air_heal" :
-			":/image/air_no").scaled(SIZESYM, SIZESYM));
-	
-	//出界
-	ui->O_range_R->setPixmap(QPixmap(gameData.carData[1].out_of_range ? ":/image/OR" :
-		":/image/OR_b").scaled(SIZESYM, SIZESYM));
-	ui->O_range_G->setPixmap(QPixmap(gameData.carData[1].out_of_range ? ":/image/OR" :
-			":/image/OR_b").scaled(SIZESYM, SIZESYM));
-
-	//地图攻击
-	if (gameData.carData[0].long_attack_map)
-		ui->Att_R->setPixmap(QPixmap(":/image/hurt").scaled(SIZESYM, SIZESYM));
-	else
-		ui->Att_R->setPixmap(QPixmap((gameData.carData[0].short_attack_map|| gameData.carData[0].out_of_range) ? ":/image/hurt_m" :
-			":/image/hurt_n").scaled(SIZESYM, SIZESYM));
-	if (gameData.carData[1].long_attack_map)
-		ui->Att_G->setPixmap(QPixmap(":/image/hurt").scaled(SIZESYM, SIZESYM));
-	else
-		ui->Att_G->setPixmap(QPixmap((gameData.carData[1].short_attack_map||gameData.carData[1].out_of_range) ? ":/image/hurt_m" :
-			":/image/hurt_n").scaled(SIZESYM, SIZESYM));
-
-	//血条
-	hp_r = gameData.carData[0].health;
-	hp_r = hp_r > 0 ? hp_r : 0;
-	hp_g = gameData.carData[1].health;
-	hp_g = hp_g > 0 ? hp_g : 0;
-	l_r = l_a * hp_r / (hp_r + hp_g);
-	l_g = l_a * hp_g / (hp_r + hp_g);
-	ui->HP_R->resize(l_r, 25);
-	ui->HP_R->setText(QString::number(hp_r));
-	ui->HP_G->resize(l_g, 25);
-	ui->HP_G->move(x_s + l_r, y_hp);
-	ui->HP_G->setText(QString::number(hp_g));
-
-	//时间
-	ui->time->setText(QString::number(gameData.round));
-
-	//飞机当前状态
-	ui->air_status->setText(QString::fromStdString(gameData.planeStatus?"Attack":"Heal"));
 
 	//小车+飞机
-    int x0 = 199 - SIZEPIC / 2;
-    int y0 = 114 - SIZEPIC / 2;
+    int x0 = 153 - SIZEPIC / 2;
+    int y0 = 47 - SIZEPIC / 2;
     cv::Point t;
 
     t = mapper.MapToImage(gameData.carData[0].pos.x, gameData.carData[0].pos.y);
@@ -222,7 +158,7 @@ void MainWindow::ui_update()
 
 void MainWindow::game_status_change()
 {
-    if (ui->pushButton_start->text() == "start") // TODO  change it to constant
+    if (ui->pushButton_start->text() == "START") // TODO  change it to constant
     {
         // game control 
         status = GameStart;
@@ -237,18 +173,18 @@ void MainWindow::game_status_change()
         }
 
         ui->pic_prop->setVisible(true);
-        ui->pushButton_start->setText(tr("pause"));
+        ui->pushButton_start->setText(tr("PAUSE"));
 
         // timer_logic
         timer_logic->start(100);
     }
-    else if (ui->pushButton_start->text() == "pause")
+    else if (ui->pushButton_start->text() == "PAUSE")
     {
         // game control
         status = GamePause;
 
         // ui
-        ui->pushButton_start->setText(tr("start"));
+        ui->pushButton_start->setText(tr("START"));
 
         // timer_logic
         timer_logic->stop();
@@ -257,13 +193,19 @@ void MainWindow::game_status_change()
 
 void MainWindow::logic_update()
 {
-    if (!gameData.carData[0].air_command && !gameData.carData[1].air_command) {
-        dobby.SetTarget(gameData.targetPoint);
-    }
-    for (int i = 0; i < 2; ++i)
-        if (gameData.carData[i].out_of_range) gameData.carData[i].health -= OUT_OF_RANGE;
+    Point p;
+    icons_update();
 
     if (game.GetGameStatus() == Running) {
+
+        if (!gameData.carData[0].air_command && !gameData.carData[1].air_command) {
+            dobby.SetTarget(gameData.targetPoint);
+        }
+
+        for (int i = 0; i < 2; ++i) {
+            if (gameData.carData[i].out_of_range()) gameData.carData[i].health -= OUT_OF_RANGE;
+        }
+
         game.Refresh(gameData);
         gameData = game.getGameData();
     }
@@ -277,7 +219,7 @@ void MainWindow::communicate_update()
         | (gameData.carData[0].air_command ? 1 : 0) << 5
         | (gameData.carData[0].heal_plane ? 1 : 0) << 4
         | (gameData.carData[0].attack_plane ? 1 : 0) << 3
-        | (gameData.carData[0].out_of_range ? 1 : 0) << 2
+        | (gameData.carData[0].out_of_range() ? 1 : 0) << 2
         | status;
 
     mes[1] = (gameData.carData[1].long_attack_map ? 1 : 0) << 7
@@ -285,7 +227,7 @@ void MainWindow::communicate_update()
         | (gameData.carData[1].air_command ? 1 : 0) << 5
         | (gameData.carData[1].heal_plane ? 1 : 0) << 4
         | (gameData.carData[1].attack_plane ? 1 : 0) << 3
-        | (gameData.carData[1].out_of_range ? 1 : 0) << 2
+        | (gameData.carData[1].out_of_range() ? 1 : 0) << 2
         | (gameData.targetHealth > 0 ? 1 : 0) << 1
         | gameData.planeStatus;
 
@@ -314,8 +256,8 @@ void MainWindow::communicate_update()
         0x0D,
         0x0A }; 
 
-    MyString ms(res, 18);
-    ui->Status->setText(ms.hex_str());
+    //MyString ms(res, 18);
+    //ui->Status->setText(ms.hex_str());
     port->send(res, 18);
 
 
@@ -336,32 +278,95 @@ void MainWindow::communicate_update()
 void MainWindow::init_gameData()
 {
     gameData.round = 0;
-    gameData.carData[0] = { 200,Point(0,0) };
-    gameData.carData[1] = { 200,Point(0,0) };
+    gameData.carData[0].health = 200;
+    gameData.carData[0].pos = Point(0, 0);
+    gameData.carData[1].health = 200;
+    gameData.carData[1].pos = Point(0, 0);
     gameData.planePoint = dobby.GetPos();
 }
 
-static void setPoint(cv::Point& p, Point& pp, bool& out) {
+void MainWindow::icons_update()
+{
+    int x_s = 10, hp_r, hp_g;
+    float l_a = 912, l_r, l_g;
+
+    //黑白区
+    ui->color_of_R->setPixmap(QPixmap(gameData.carData[0].color ? ":/image/map_white" : ":/image/map_black"));
+    ui->color_of_G->setPixmap(QPixmap(gameData.carData[1].color ? ":/image/map_white" : ":/image/map_black"));
+    //ui->pic->setText(QString::number(gameData.targetHealth));
+    //飞机控制
+    ui->Air_con_R->setPixmap(QPixmap((gameData.carData[0].air_command) ? ":/image/plane" : ":/image/prop_0"));
+    ui->Air_con_G->setPixmap(QPixmap((gameData.carData[1].air_command) ? ":/image/plane" : ":/image/prop_0"));
+
+    //飞机攻击、加血
+    if (gameData.carData[0].attack_plane)
+        ui->Air_A_R->setPixmap(QPixmap(":/image/lightning"));
+    else ui->Air_A_R->setPixmap(QPixmap(gameData.carData[0].heal_plane ? ":/image/heart" : ":/image/prop_0"));
     
-    out = false;
+    if (gameData.carData[1].attack_plane)
+        ui->Air_A_G->setPixmap(QPixmap(":/image/lightning"));
+    else ui->Air_A_G->setPixmap(QPixmap(gameData.carData[1].heal_plane ? ":/image/heart" : ":/image/prop_0"));
+
+    //出界
+    ui->O_range_R->setPixmap(QPixmap(gameData.carData[0].out_of_range() ? ":/image/location_not_found" : ":/image/location_red"));
+    ui->O_range_G->setPixmap(QPixmap(gameData.carData[1].out_of_range() ? ":/image/location_not_found" : ":/image/location_green"));
+
+    //地图攻击
+    if (gameData.carData[0].short_attack_map || gameData.carData[0].out_of_range())
+        ui->Att_R->setPixmap(QPixmap(":/image/warning_1"));
+    else if (gameData.carData[0].long_attack_map)
+        ui->Att_R->setPixmap(QPixmap(":/image/warning_0"));
+    else ui->Att_R->setPixmap(QPixmap(":/image/verified"));
+    
+    if (gameData.carData[1].short_attack_map || gameData.carData[1].out_of_range())
+        ui->Att_G->setPixmap(QPixmap(":/image/warning_1"));
+    else if (gameData.carData[1].long_attack_map)
+        ui->Att_G->setPixmap(QPixmap(":/image/warning_0"));
+    else ui->Att_G->setPixmap(QPixmap(":/image/verified"));
+
+    //血条
+    hp_r = gameData.carData[0].health;
+    hp_r = hp_r > 0 ? hp_r : 0;
+    hp_g = gameData.carData[1].health;
+    hp_g = hp_g > 0 ? hp_g : 0;
+    l_r = l_a * hp_r / (hp_r + hp_g);
+    l_g = l_a * hp_g / (hp_r + hp_g);
+    ui->HP_R->resize(l_r, 25);
+    ui->HP_R->move(x_s, 10);
+    ui->HP_R->setText(QString::number(hp_r));
+    ui->HP_G->resize(l_g, 25);
+    ui->HP_G->move(x_s + l_r, 10);
+    ui->HP_G->setText(QString::number(hp_g));
+
+    //时间
+    ui->time->setText(QString("TIME:") + QString::number(gameData.round / FREQ) + QString("s"));
+
+    //飞机当前状态
+    ui->air_status->setPixmap(QPixmap((gameData.planeStatus == PlaneHeal) ? ":/image/heart" : ":/image/lightning"));
+
+}
+
+static void setPoint(cv::Point& p, Point& pp/*, bool& out*/) {
+    
+    //out = false;
 
     pp.x = p.x;
     if (p.x < 0) {
-        out = true;
+        //out = true;
         pp.x = 0;
     }
     if (p.x > 255) {
-        out = true;
+        //out = true;
         pp.x = 255;
     }
 
     pp.y = p.y;
     if (p.y < 0) {
-        out = true;
+        //out = true;
         pp.y = 0;
     }
     if (p.y > 255) {
-        out = true;
+        //out = true;
         pp.y = 255;
     }
 
@@ -385,10 +390,10 @@ void MainWindow::capture_update()
         if (!capture_frame.empty()) {
 
             // update status
-            static const char* status_label_format = "%dfps"; // frame rate
+            /*static const char* status_label_format = "%dfps"; // frame rate
             static char buffer[512];
             sprintf(buffer, status_label_format, camera.getFrameRate());
-            if (camera.getFrameRate()<20) ui->Status->setText(buffer);
+            if (camera.getFrameRate()<20) ui->Status->setText(buffer);*/
 
             // locator
             locator.Refresh(capture_frame);
@@ -399,16 +404,18 @@ void MainWindow::capture_update()
 
             // set the point
             cv::Point t;
-
             if (locator_points[0] != cv::Point(0, 0)) {
                 t = mapper.ImageToMap(locator_points[0]);
-                setPoint(t, gameData.carData[0].pos, gameData.carData[0].out_of_range);
+                setPoint(t, gameData.carData[0].pos/*, gameData.carData[0].out_of_range*/);
+                //if (t.x <= 0 || t.x >= 255 || t.y <= 0 || t.y >= 255) gameData.carData[0].out_of_range = true;
             }
-
             if (locator_points[1] != cv::Point(0, 0)) {
                 t = mapper.ImageToMap(locator_points[1]);
-                setPoint(t, gameData.carData[1].pos, gameData.carData[1].out_of_range);
+                setPoint(t, gameData.carData[1].pos/*, gameData.carData[1].out_of_range*/);
+                //if (t.x <= 0 || t.x >= 255 || t.y <= 0 || t.y >= 255) gameData.carData[1].out_of_range = true;
             }
+            
+
 
             // update image
             capture_image = QImage(

@@ -85,15 +85,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_mainwindow.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_widget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_widget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="src\widget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_image.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -102,17 +93,11 @@
     <CustomBuild Include="ui\mainwindow.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="include\mainwindow.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="include\widget.h">
-      <Filter>Generated Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ui\widget.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="image.qrc">
       <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="include\mainwindow.h">
+      <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -176,35 +161,17 @@
     <ClInclude Include="include\logic\GameData.h">
       <Filter>Header Files\logic</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_widget.h">
+    <ClInclude Include="include\game.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="image\car_2.png" />
-    <Image Include="image\car_0.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="image\car_1.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="image\star.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="image\ufo.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="image\prop_1.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="image\prop_2.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="image\prop_3.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="image\prop_0.png">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <ClInclude Include="include\airplane\dobby.hpp">
+      <Filter>Header Files\airplane</Filter>
+    </ClInclude>
+    <ClInclude Include="include\display\log_reader.hpp">
+      <Filter>Header Files\display</Filter>
+    </ClInclude>
+    <ClInclude Include="include\locator\mapper.hpp">
+      <Filter>Header Files\locator</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

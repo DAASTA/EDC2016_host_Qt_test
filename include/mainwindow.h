@@ -51,7 +51,8 @@ private slots:
 
 private:
     void init_gameData();
-    
+    void icons_update();
+
     Ui::MainWindow *ui;
 
     GameControlStatus status;
