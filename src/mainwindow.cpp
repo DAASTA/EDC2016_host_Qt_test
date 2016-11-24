@@ -154,6 +154,12 @@ void MainWindow::ui_update()
     t = mapper.MapToImage(gameData.propPoint.x, gameData.propPoint.y);
     ui->pic_prop->move(x0 + t.x, y0 + t.y);
 	
+    //时间
+    ui->time->setText(QString("TIME:") + QString::number(gameData.round / FREQ) + QString("s"));
+    QPalette pe;
+    pe.setColor(QPalette::WindowText, (status == GameStart) ? Qt::black : Qt::red);
+    ui->time->setPalette(pe);
+
 }
 
 void MainWindow::game_status_change()
@@ -198,14 +204,15 @@ void MainWindow::logic_update()
 
     if (game.GetGameStatus() == Running) {
 
-
-
         for (int i = 0; i < 2; ++i) {
             if (gameData.carData[i].out_of_range()) gameData.carData[i].health -= OUT_OF_RANGE;
         }
 
         game.Refresh(gameData);
         gameData = game.getGameData();
+    }
+    else {
+        status = GameOver;
     }
 }
 
@@ -343,11 +350,9 @@ void MainWindow::icons_update()
     ui->HP_G->move(x_s + l_r, 10);
     ui->HP_G_text->setText(QString::number(hp_g) + QString("HP"));
 
-    //时间
-    ui->time->setText(QString("TIME:") + QString::number(gameData.round / FREQ) + QString("s"));
-
     //飞机当前状态
     ui->air_status->setPixmap(QPixmap((gameData.planeStatus == PlaneHeal) ? ":/image/heart" : ":/image/lightning"));
+    ui->color_of_none->setPixmap(QPixmap((gameData.planeStatus == PlaneHeal) ? ":/image/map_white" : ":/image/map_black"));
 
 }
 

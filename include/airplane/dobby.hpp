@@ -5,6 +5,8 @@
 #include"logic/Common.h"
 #include"logic/Random.hpp"
 
+//#define REAL_DOBBY
+
 class Dobby {
 
 public:        
@@ -70,7 +72,9 @@ public:
     
 
     inline Point GetPos() {
-        /*int dx = random.Rand(2);
+
+#ifndef REAL_DOBBY
+        int dx = random.Rand(2);
         int dy = random.Rand(2);
         if (pos_.x > target_.x) dx = -dx;
         if (pos_.y > target_.y) dy = -dy;
@@ -81,8 +85,9 @@ public:
         if (y < 0) y = 0;
         if (y > 255) y = 255;        
         pos_.x = x;
-        pos_.y = y;*/
-
+        pos_.y = y;
+        return pos_;
+#else
         // read memory // TODO mapper translater
         Point pos(0, 0);
 
@@ -113,6 +118,7 @@ public:
         setNumber(pos_.y, pos.y);
 
         return pos_;
+#endif
     }
 
     inline bool isValid() { return valid_; }

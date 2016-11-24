@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>946</width>
-    <height>598</height>
+    <height>619</height>
    </rect>
   </property>
   <property name="font">
@@ -24,7 +24,7 @@
     <property name="geometry">
      <rect>
       <x>620</x>
-      <y>540</y>
+      <y>550</y>
       <width>160</width>
       <height>45</height>
      </rect>
@@ -45,7 +45,7 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>540</y>
+      <y>550</y>
       <width>160</width>
       <height>45</height>
      </rect>
@@ -323,7 +323,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="../image.qrc">:/image/heart</pixmap>
+     <pixmap resource="../image.qrc">:/image/lightning</pixmap>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_hpchange_1">
@@ -560,6 +560,26 @@
      <pixmap resource="../image.qrc">:/image/plane</pixmap>
     </property>
    </widget>
+   <widget class="QLabel" name="color_of_none">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>520</y>
+      <width>128</width>
+      <height>128</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: transparent</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../image.qrc">:/image/map_black</pixmap>
+    </property>
+   </widget>
+   <zorder>color_of_none</zorder>
    <zorder>Air_A_R</zorder>
    <zorder>color_of_R</zorder>
    <zorder>Att_R</zorder>
