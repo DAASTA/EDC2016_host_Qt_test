@@ -84,6 +84,8 @@ public:
         pos_.y = y;*/
 
         // read memory // TODO mapper translater
+        Point pos(0, 0);
+
         LPCWSTR strMapName_pos = L"ZeroTechDobbyPos";
         HANDLE hMap = OpenFileMapping(FILE_MAP_ALL_ACCESS, 0, strMapName_pos);
         if (NULL == hMap) {
@@ -99,10 +101,16 @@ public:
                 return pos_;
             }
 
-            pos_.x = p_xyz->x / map_to_true;
-            pos_.y = p_xyz->y / map_to_true;
+            double x = p_xyz->x / map_to_true;
+            double y = p_xyz->y / map_to_true;
             p_xyz->writeflag = 0;
+
+            if (x < 0) pos.x = 0; else if (x >= 255) pos.x = 255; else pos.x = x;
+            if (y < 0) pos.y = 0; else if (y >= 255) pos.y = 255; else pos.y = y;
         }
+
+        setNumber(pos_.x, pos.x);
+        setNumber(pos_.y, pos.y);
 
         return pos_;
     }
@@ -112,6 +120,20 @@ public:
 private:
 
     bool valid_;
+
+    void setNumber(uchar& raw, double target, int step = 3) {
+        int r = raw;
+        if (r < target) {
+            if (target - r < step) r = target;
+            else r += step;
+        }
+        else {
+            if (r - target < step) r = target;
+            else r -= step;
+        }
+
+        if (r < 0) raw = 0; else if (r>255) raw = 255; else raw = r;
+    }
 
     double true_size_256;
     double true_size_cross;

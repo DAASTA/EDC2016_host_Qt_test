@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // Serial port
     char tail[3] = {0x0D, 0x0A, 0};
     SerialPortProtol protol(5, tail);
-    port = new SerialPort(12, 115200, protol);
+    port = new SerialPort(7, 115200, protol);
 
     // game control
     status = GameWaiting;
@@ -50,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pic_car_0->setPixmap(QPixmap(":/image/location_red").scaled(SIZEPIC, SIZEPIC));
     ui->pic_car_1->setPixmap(QPixmap(":/image/location_green").scaled(SIZEPIC, SIZEPIC));
     ui->pic_target->setPixmap(QPixmap(":/image/star_s").scaled(SIZEPIC, SIZEPIC));
-    ui->pic_air->setPixmap(QPixmap(":/image/plane").scaled(SIZEPIC, SIZEPIC));
+    ui->pic_air->setPixmap(QPixmap(":/image/ufo").scaled(SIZEPIC, SIZEPIC));
     ui->pic_car_0->setVisible(false);
     ui->pic_car_1->setVisible(false);
     ui->pic_target->setVisible(false);
@@ -198,9 +198,7 @@ void MainWindow::logic_update()
 
     if (game.GetGameStatus() == Running) {
 
-        if (!gameData.carData[0].air_command && !gameData.carData[1].air_command) {
-            dobby.SetTarget(gameData.targetPoint);
-        }
+
 
         for (int i = 0; i < 2; ++i) {
             if (gameData.carData[i].out_of_range()) gameData.carData[i].health -= OUT_OF_RANGE;
@@ -256,10 +254,13 @@ void MainWindow::communicate_update()
         0x0D,
         0x0A }; 
 
-    //MyString ms(res, 18);
-    //ui->Status->setText(ms.hex_str());
+    MyString ms(res, 18);
+    ui->Status->setText(ms.hex_str());
     port->send(res, 18);
 
+    if (!gameData.carData[0].air_command && !gameData.carData[1].air_command) {
+        dobby.SetTarget(gameData.targetPoint, gameData.planeStatus == PlaneHeal);
+    }
 
     // receive
     vector<MyString> ll = port->receive();
@@ -268,11 +269,14 @@ void MainWindow::communicate_update()
         MyString& ms = ll[ll.size() - 1];
         if (ms.length() == 5) {
             if (gameData.carData[ms[0]].air_command) {
-                dobby.SetTarget(Point(ms[1], ms[2]));
+                dobby.SetTarget(Point(ms[1], ms[2]), gameData.planeStatus == PlaneHeal);
             }
         }
         //ui->Status->setText(ms.hex_str());
     }
+
+
+
 }
 
 void MainWindow::init_gameData()

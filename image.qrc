@@ -26,5 +26,6 @@
         <file alias="verified">image/verfied.png</file>
         <file alias="warning_0">image/warning_0.png</file>
         <file alias="warning_1">image/warning_1.png</file>
+        <file alias="ufo">image/ufo.png</file>
     </qresource>
 </RCC>
