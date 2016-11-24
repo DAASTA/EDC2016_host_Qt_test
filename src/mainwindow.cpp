@@ -6,14 +6,14 @@ using namespace std;
 
 const int SIZEPIC = 50;
 const int SIZESYM = 90;
-const string MAP_FILENAME = "./data/map_预审.txt";
+const string MAP_FILENAME = "./data/map.txt";
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
     ,ui(new Ui::MainWindow)
     ,game(MAP_FILENAME)
     ,mapper("./data/index_points.txt")
-    ,camera(1, "./data/hd_usb_camera.xml")
+    ,camera(0, "./data/hd_usb_camera.xml")
     //, camera(0)
     ,capture_timer(NULL)
 {
@@ -295,8 +295,9 @@ void MainWindow::icons_update()
     ui->color_of_G->setPixmap(QPixmap(gameData.carData[1].color ? ":/image/map_white" : ":/image/map_black"));
     //ui->pic->setText(QString::number(gameData.targetHealth));
     //飞机控制
-    ui->Air_con_R->setPixmap(QPixmap((gameData.carData[0].air_command) ? ":/image/plane" : ":/image/prop_0"));
-    ui->Air_con_G->setPixmap(QPixmap((gameData.carData[1].air_command) ? ":/image/plane" : ":/image/prop_0"));
+    ui->Air_con_R->setPixmap(QPixmap((gameData.carData[0].air_command) ? ":/image/plane" : ":/image/plane_no"));
+    ui->Air_con_G->setPixmap(QPixmap((gameData.carData[1].air_command) ? ":/image/plane" : ":/image/plane_no"));
+    ui->Air_con_none->setPixmap(QPixmap((gameData.carData[0].air_command || gameData.carData[1].air_command) ? ":/image/plane_no" : ":/image/plane"));
 
     //飞机攻击、加血
     if (gameData.carData[0].attack_plane)
@@ -333,10 +334,10 @@ void MainWindow::icons_update()
     l_g = l_a * hp_g / (hp_r + hp_g);
     ui->HP_R->resize(l_r, 25);
     ui->HP_R->move(x_s, 10);
-    ui->HP_R->setText(QString::number(hp_r));
+    ui->HP_R_text->setText(QString::number(hp_r) + QString("HP"));
     ui->HP_G->resize(l_g, 25);
     ui->HP_G->move(x_s + l_r, 10);
-    ui->HP_G->setText(QString::number(hp_g));
+    ui->HP_G_text->setText(QString::number(hp_g) + QString("HP"));
 
     //时间
     ui->time->setText(QString("TIME:") + QString::number(gameData.round / FREQ) + QString("s"));

@@ -18,15 +18,18 @@ public:
         : pos_(128, 128)
         , target_(128, 128)
         , valid_(false)
+        , true_size_256(2.05)
+        , true_size_cross(2.28)
+        , high_z(150)
+        , low_z(75)
     {
+        map_to_true = true_size_256 / 256;
+
         SetTarget(target_);
     }
 
-    inline void SetTarget(Point p) {
+    inline void SetTarget(Point p, bool high = true) {
         target_ = p; 
-
-        p.x = 128;
-        p.y = 128;
 
         // set the memory
         LPCWSTR strMapName_pos = L"ZeroTechDobbyTarget";
@@ -46,9 +49,10 @@ public:
             pBuffer = MapViewOfFile(hMap, FILE_MAP_ALL_ACCESS, 0, 0, 0);
             p_xyz = (pos_xyz_info*)pBuffer;
 
-            p_xyz->x = 128.0;
-            p_xyz->y = 128.0;
-            p_xyz->z = 200.0;
+            // init
+            p_xyz->x = (double)128*map_to_true * 100;
+            p_xyz->y = (double)128*map_to_true * 100;
+            p_xyz->z = high_z;
             p_xyz->writeflag = 1;
             return;
         }
@@ -56,9 +60,9 @@ public:
         pBuffer = MapViewOfFile(hMap, FILE_MAP_ALL_ACCESS, 0, 0, 0);
         p_xyz = (pos_xyz_info*)pBuffer;
 
-        p_xyz->x = (double)p.x;
-        p_xyz->y = (double)p.y;
-        p_xyz->z = 200.0;
+        p_xyz->x = (double)p.x*map_to_true * 100;
+        p_xyz->y = (double)p.y*map_to_true * 100;
+        p_xyz->z = high ? high_z : low_z;
         p_xyz->writeflag = 1;
         return;
     }
@@ -95,8 +99,8 @@ public:
                 return pos_;
             }
 
-            pos_.x = p_xyz->x * 100;
-            pos_.y = p_xyz->y * 100;
+            pos_.x = p_xyz->x / map_to_true;
+            pos_.y = p_xyz->y / map_to_true;
             p_xyz->writeflag = 0;
         }
 
@@ -108,6 +112,12 @@ public:
 private:
 
     bool valid_;
+
+    double true_size_256;
+    double true_size_cross;
+    double map_to_true;
+
+    double high_z, low_z;
 
     Point pos_;
     Point target_;

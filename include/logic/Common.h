@@ -36,7 +36,7 @@ const double PLANE_HEAL = 4. / FREQ;       // 飞机一回合回复值
 // Target 参数
 const double HP_TARGET = 40.;      // 目标点HP
 const double MAP_SHORT_ATTACK = 8. / FREQ; // 地图暴击一回合伤害值
-const double MAP_LONG_ATTACK = 4. / FREQ;  // 地图普攻一回合伤害值
+const double MAP_LONG_ATTACK = 2. / FREQ;  // 地图普攻一回合伤害值
 const double OUT_OF_RANGE = 4. / FREQ;       // 出界惩罚
 const double RADIUS_CRITICAL = 20.;      // 远/近攻击（暴击/普攻）的临界距离
 const int TARGET_CD = 3 * FREQ;            // 目标点冷却时间
@@ -44,7 +44,7 @@ const int TARGET_CD = 3 * FREQ;            // 目标点冷却时间
 // Prop 参数
 const double RADIUS_PROP = 20.;         // 道具接触半径
 const double PROP_AVOID = 90.;          // 产生道具的回避距离
-const double PROP_MARGIN = 20.;         // 产生道具回避地图边境的距离
+const double PROP_MARGIN = 22.;         // 产生道具回避地图边境的距离
 const int PROP_CD = 3 * FREQ;           // 道具冷却时间
 const int PROP_ABANDON = 15 * FREQ;     // 道具没有被吃掉自动刷新
 const int PROP_SIZE = 4;    

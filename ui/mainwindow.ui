@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>939</width>
+    <width>946</width>
     <height>598</height>
    </rect>
   </property>
@@ -32,6 +32,9 @@
     <property name="font">
      <font>
       <pointsize>20</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
@@ -50,6 +53,9 @@
     <property name="font">
      <font>
       <pointsize>20</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
@@ -125,13 +131,18 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>30</y>
+      <y>60</y>
       <width>621</width>
       <height>20</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <italic>true</italic>
+     </font>
+    </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string>camera</string>
     </property>
    </widget>
    <widget class="QLabel" name="pic">
@@ -183,14 +194,8 @@
       <x>10</x>
       <y>10</y>
       <width>456</width>
-      <height>25</height>
+      <height>15</height>
      </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>0</width>
-      <height>25</height>
-     </size>
     </property>
     <property name="maximumSize">
      <size>
@@ -208,17 +213,11 @@
    <widget class="QLabel" name="HP_G">
     <property name="geometry">
      <rect>
-      <x>470</x>
+      <x>460</x>
       <y>10</y>
       <width>456</width>
-      <height>25</height>
+      <height>15</height>
      </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>0</width>
-      <height>25</height>
-     </size>
     </property>
     <property name="maximumSize">
      <size>
@@ -242,17 +241,18 @@
    <widget class="QLabel" name="time">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>380</x>
       <y>530</y>
-      <width>161</width>
+      <width>181</width>
       <height>41</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>20</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
+      <pointsize>24</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
@@ -265,11 +265,16 @@
    <widget class="QPushButton" name="pushButton_change_1">
     <property name="geometry">
      <rect>
-      <x>860</x>
-      <y>510</y>
+      <x>870</x>
+      <y>550</y>
       <width>70</width>
       <height>28</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <italic>true</italic>
+     </font>
     </property>
     <property name="text">
      <string>ModHP</string>
@@ -279,7 +284,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>520</y>
+      <y>550</y>
       <width>70</width>
       <height>28</height>
      </rect>
@@ -289,10 +294,17 @@
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>520</y>
+      <y>550</y>
       <width>70</width>
       <height>28</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>50</weight>
+      <italic>true</italic>
+      <bold>false</bold>
+     </font>
     </property>
     <property name="text">
      <string>ModHP</string>
@@ -302,9 +314,9 @@
     <property name="geometry">
      <rect>
       <x>410</x>
-      <y>480</y>
-      <width>141</width>
-      <height>121</height>
+      <y>490</y>
+      <width>128</width>
+      <height>128</height>
      </rect>
     </property>
     <property name="text">
@@ -317,8 +329,8 @@
    <widget class="QLineEdit" name="lineEdit_hpchange_1">
     <property name="geometry">
      <rect>
-      <x>790</x>
-      <y>510</y>
+      <x>800</x>
+      <y>550</y>
       <width>70</width>
       <height>28</height>
      </rect>
@@ -329,8 +341,8 @@
      <rect>
       <x>800</x>
       <y>360</y>
-      <width>131</width>
-      <height>121</height>
+      <width>128</width>
+      <height>128</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -346,8 +358,8 @@
    <widget class="QLabel" name="Air_A_R">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>210</y>
+      <x>10</x>
+      <y>200</y>
       <width>141</width>
       <height>121</height>
      </rect>
@@ -364,8 +376,8 @@
      <rect>
       <x>10</x>
       <y>360</y>
-      <width>131</width>
-      <height>111</height>
+      <width>128</width>
+      <height>128</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -382,9 +394,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>40</y>
-      <width>131</width>
-      <height>131</height>
+      <y>30</y>
+      <width>128</width>
+      <height>128</height>
      </rect>
     </property>
     <property name="text">
@@ -397,10 +409,10 @@
    <widget class="QLabel" name="Air_A_G">
     <property name="geometry">
      <rect>
-      <x>810</x>
-      <y>190</y>
-      <width>121</width>
-      <height>141</height>
+      <x>800</x>
+      <y>200</y>
+      <width>128</width>
+      <height>128</height>
      </rect>
     </property>
     <property name="text">
@@ -413,17 +425,17 @@
    <widget class="QLabel" name="Air_con_G">
     <property name="geometry">
      <rect>
-      <x>790</x>
-      <y>150</y>
-      <width>131</width>
-      <height>121</height>
+      <x>800</x>
+      <y>170</y>
+      <width>128</width>
+      <height>128</height>
      </rect>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="../image.qrc">:/image/plane</pixmap>
+     <pixmap resource="../image.qrc">:/image/plane_no</pixmap>
     </property>
    </widget>
    <widget class="QLabel" name="O_range_G">
@@ -431,8 +443,8 @@
      <rect>
       <x>800</x>
       <y>320</y>
-      <width>121</width>
-      <height>121</height>
+      <width>128</width>
+      <height>128</height>
      </rect>
     </property>
     <property name="text">
@@ -446,9 +458,9 @@
     <property name="geometry">
      <rect>
       <x>800</x>
-      <y>40</y>
-      <width>121</width>
-      <height>141</height>
+      <y>30</y>
+      <width>128</width>
+      <height>128</height>
      </rect>
     </property>
     <property name="text">
@@ -463,8 +475,8 @@
      <rect>
       <x>10</x>
       <y>320</y>
-      <width>141</width>
-      <height>131</height>
+      <width>128</width>
+      <height>128</height>
      </rect>
     </property>
     <property name="text">
@@ -478,9 +490,67 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>160</y>
+      <y>170</y>
+      <width>128</width>
+      <height>128</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../image.qrc">:/image/plane_no</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="HP_R_text">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>110</y>
       <width>131</width>
-      <height>121</height>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>36</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>200HP</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="HP_G_text">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>110</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>36</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>200HP</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Air_con_none">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>460</y>
+      <width>128</width>
+      <height>128</height>
      </rect>
     </property>
     <property name="text">
@@ -515,8 +585,11 @@
    <zorder>O_range_R</zorder>
    <zorder>Air_con_R</zorder>
    <zorder>air_status</zorder>
-   <zorder>time</zorder>
    <zorder>O_range_G</zorder>
+   <zorder>HP_R_text</zorder>
+   <zorder>HP_G_text</zorder>
+   <zorder>Air_con_none</zorder>
+   <zorder>time</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
