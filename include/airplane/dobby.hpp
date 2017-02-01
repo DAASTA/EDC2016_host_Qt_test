@@ -31,7 +31,15 @@ public:
     }
 
     inline void SetTarget(Point p, bool high = true) {
+
+        if (p.x == 0 && p.y == 0) return;
+
         target_ = p; 
+
+        if (p.x < RADIUS_PLANE_ATTACK) p.x = RADIUS_PLANE_ATTACK;
+        if (p.x > 255 - RADIUS_PLANE_ATTACK) p.x = 255 - RADIUS_PLANE_ATTACK;
+        if (p.y < RADIUS_PLANE_ATTACK) p.y = RADIUS_PLANE_ATTACK;
+        if (p.y > 255 - RADIUS_PLANE_ATTACK) p.y = 255 - RADIUS_PLANE_ATTACK;
 
         // set the memory
         LPCWSTR strMapName_pos = L"ZeroTechDobbyTarget";

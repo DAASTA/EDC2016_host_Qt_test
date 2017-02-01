@@ -53,9 +53,6 @@
     <Filter Include="Header Files\airplane">
       <UniqueIdentifier>{90cfcc74-81c4-43cc-9b96-f9f0fc804a49}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\camera">
-      <UniqueIdentifier>{82861ab9-ad35-419c-94ed-2f4f11228374}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\communication">
       <UniqueIdentifier>{8159efc3-eebb-42ce-8122-d736d817a8a9}</UniqueIdentifier>
     </Filter>
@@ -67,6 +64,9 @@
     </Filter>
     <Filter Include="Header Files\logic">
       <UniqueIdentifier>{225df912-0702-417e-8959-e6c224547b15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\camera">
+      <UniqueIdentifier>{82861ab9-ad35-419c-94ed-2f4f11228374}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

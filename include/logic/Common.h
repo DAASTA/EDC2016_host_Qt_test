@@ -22,7 +22,7 @@ const int MAX_ROUND = 180 * FREQ; // 至多进行回合（限制比赛时间）
 
 
 // Car 参数
-const double HP_DEATH = 0.;       // 最低血量
+const double HP_DEATH = -0.0;       // 最低血量
 const double HP_INITIAL = 200.;   // 初始血量
 const double HEALTH_PROP = 40.;     // 道具瞬间回复血量
 

@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // Serial port
     char tail[3] = {0x0D, 0x0A, 0};
     SerialPortProtol protol(5, tail);
-    port = new SerialPort(7, 115200, protol);
+    port = new SerialPort(13, 115200, protol);
 
     // game control
     status = GameWaiting;
@@ -293,7 +293,9 @@ void MainWindow::init_gameData()
     gameData.carData[0].pos = Point(0, 0);
     gameData.carData[1].health = 200;
     gameData.carData[1].pos = Point(0, 0);
+    gameData.targetPoint = Point(128, 128);
     gameData.planePoint = dobby.GetPos();
+
 }
 
 void MainWindow::icons_update()
